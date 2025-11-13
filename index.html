@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
-    <script src="js/script.js"></script>
-    <title>Document</title>
+    <script type="module" src="js/script.js"></script>
+    <title>CineFlix</title>
 </head>
 <body>
     <header class="header">
@@ -18,7 +18,7 @@
 
         <div class="buttons-container">
             <div class="search-wrapper">
-                <input type="text" class="search" placeholder="Pesquisar...">
+                <input type="text" class="search" placeholder="Pesquisar..." id="search" >
             </div>
 
             <button class="search-button" type="button">
@@ -31,7 +31,11 @@
         </div>
     </header>
 
-    <div class="panel" id="panel">
+    <main>
+        <home-page></home-page>
+
+        <search-page></search-page>
+    </main>
 
     </div>
 </body>

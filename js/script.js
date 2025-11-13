@@ -1,34 +1,34 @@
-const API = "https://api.themoviedb.org/3"
-const TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NjlmNDQ2MjMwMGNkMGU5ZWVjZmQzZGFhNDQzYjhiNyIsIm5iZiI6MTc2Mjk5Njk3Ni4wMzYsInN1YiI6IjY5MTUzMmYwNjkwN2EyMzllNjRjOTNiZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4XKtnmrOxVYNoiWchVda_uRw2n_pHUetGYHGu_Q4duw";
+import { renderCards } from "./renderCards.js";
+import { getSearch } from "./search.js";
+import "../pages/home.js";
+import "../pages/search.js";
+import "../components/card.js";
+
+let local = "home";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const panel = document.getElementById("panel");
+  const search = document.getElementById("search");
 
-  async function getTeste() {
-    const res = await fetch(`${API}/search/multi?query=batman&language=pt-BR&page=1&include_adult=false`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "application/json"
-      }
-    }).then(res => res.json());
+  const homePage = document.querySelector("home-page");
+  const moviesPage = document.querySelector("movies-page");
+  const tvSeriesPage = document.querySelector("tvSeries-page");
+  const searchPage = document.querySelector("search-page");
 
-    return res;
-  }
+  searchPage.style.display = "none";
 
-  panel.addEventListener("click", async () => {
-    const result = await getTeste();
-    
-    result.results.forEach(r => {
-      console.log(r);
-      const element = document.createElement("div");
-      const img = document.createElement("img");
-      const imageUrl = `https://image.tmdb.org/t/p/w500${r.poster_path}`;
-      img.src = r.poster_path ? `${imageUrl}` : "sem imagem";
-      element.className = "child";
-      element.textContent = r.name || r.title;
-      panel.appendChild(element);
-      panel.appendChild(img);
-    });
+  search.addEventListener("input", async (e) => {
+    const value = e.target.value.trim();
+
+    const isEmpty = value === "";
+    homePage.style.display = isEmpty ? "flex" : "none";
+    searchPage.style.display = isEmpty ? "none" : "flex";
+
+    if (isEmpty) return;
+
+    const result = await getSearch(value, local);
+
+    const container = document.querySelector(".search-page .cards-container");
+
+    renderCards(container, result.results);
   })
 })
