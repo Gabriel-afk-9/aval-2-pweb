@@ -1,34 +1,75 @@
-const API = "https://api.themoviedb.org/3"
-const TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NjlmNDQ2MjMwMGNkMGU5ZWVjZmQzZGFhNDQzYjhiNyIsIm5iZiI6MTc2Mjk5Njk3Ni4wMzYsInN1YiI6IjY5MTUzMmYwNjkwN2EyMzllNjRjOTNiZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4XKtnmrOxVYNoiWchVda_uRw2n_pHUetGYHGu_Q4duw";
+import { Config } from "./config.js";
+import { search } from "./search.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.querySelector(".search");
   const panel = document.getElementById("panel");
 
-  async function getTeste() {
-    const res = await fetch(`${API}/search/multi?query=batman&language=pt-BR&page=1&include_adult=false`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "application/json"
-      }
-    }).then(res => res.json());
+  function createMovieCard(movie) {
+    const card = document.createElement("div");
+    card.classList.add("movie-card");
 
-    return res;
+    const poster = document.createElement("img");
+    poster.classList.add("movie-poster");
+    poster.src = movie.poster_path
+      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+      : "assets/no-image.png";
+    poster.alt = movie.title || movie.name;
+
+    const info = document.createElement("div");
+    info.classList.add("movie-info");
+
+    const title = document.createElement("h2");
+    title.textContent = movie.title || movie.name;
+
+    const date = document.createElement("p");
+    date.textContent = movie.release_date
+      ? `Lançamento: ${movie.release_date}`
+      : movie.first_air_date
+      ? `Lançamento: ${movie.first_air_date}`
+      : "Sem data disponível";
+
+    const rating = document.createElement("span");
+    rating.classList.add("movie-rating");
+    rating.textContent = movie.vote_average
+      ? `⭐ ${movie.vote_average.toFixed(1)}`
+      : "⭐ -";
+
+    info.appendChild(title);
+    info.appendChild(date);
+    info.appendChild(rating);
+    card.appendChild(poster);
+    card.appendChild(info);
+
+    return card;
   }
 
-  panel.addEventListener("click", async () => {
-    const result = await getTeste();
-    
-    result.results.forEach(r => {
-      console.log(r);
-      const element = document.createElement("div");
-      const img = document.createElement("img");
-      const imageUrl = `https://image.tmdb.org/t/p/w500${r.poster_path}`;
-      img.src = r.poster_path ? `${imageUrl}` : "sem imagem";
-      element.className = "child";
-      element.textContent = r.name || r.title;
-      panel.appendChild(element);
-      panel.appendChild(img);
+  function showResults(results) {
+    panel.innerHTML = "";
+    if (!results || results.length === 0) {
+      panel.innerHTML = "<p class='no-results'>Nenhum resultado encontrado.</p>";
+      return;
+    }
+
+    results.forEach((movie) => {
+      const card = createMovieCard(movie);
+      panel.appendChild(card);
     });
-  })
-})
+  }
+
+  searchInput.addEventListener("keypress", async (e) => {
+    if (e.key === "Enter") {
+      const query = searchInput.value.trim();
+      if (!query) return;
+      panel.innerHTML = "<p class='loading'>Carregando...</p>";
+
+      try {
+        const result = await search(query, "movie");
+        showResults(result.results);
+      } catch (err) {
+        console.error(err);
+        panel.innerHTML = "<p class='error'>Erro ao buscar filmes</p>";
+      }
+    }
+  });
+});
