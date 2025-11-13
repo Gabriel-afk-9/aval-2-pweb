@@ -1,11 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Catálogo Interativo de Filmes e Séries com dados da API IMDb">
+    <title>Catálogo de Filmes e Séries</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets/creative-film-logo-design_279272-original.png">
+
 </head>
 <body>
-    
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>🎬 Catálogo de Filmes e Séries</h1>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="#home" class="nav-link active" data-page="home">Catálogo</a></li>
+                        <li><a href="#team" class="nav-link" data-page="team">Equipe</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="home" class="page active">
+            <div class="container">
+                <div class="filters-section">
+                    <h2>Filtros</h2>
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="search-input">Pesquisar:</label>
+                            <input type="text" id="search-input" placeholder="Digite o nome do filme ou série...">
+                            <button id="search-btn" class="btn btn-primary">Pesquisar</button>
+                        </div>
+                        <div class="filter-group">
+                            <label for="genre-filter">Gênero:</label>
+                            <select id="genre-filter">
+                                <option value="">Todos os Gêneros</option>
+                                <option value="Action">Ação</option>
+                                <option value="Comedy">Comédia</option>
+                                <option value="Drama">Drama</option>
+                                <option value="Horror">Horror</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Sci-Fi">Ficção Científica</option>
+                                <option value="Thriller">Thriller</option>
+                                <option value="Animation">Animação</option>
+                                <option value="Adventure">Aventura</option>
+                                <option value="Crime">Crime</option>
+                                <option value="Mystery">Mistério</option>
+                                <option value="Family">Família</option>
+                                <option value="Documentary">Documentário</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="type-filter">Tipo:</label>
+                            <select id="type-filter">
+                                <option value="">Todos os Tipos</option>
+                                <option value="MOVIE">Filme</option>
+                                <option value="TV_SERIES">Série de TV</option>
+                                <option value="TV_MINI_SERIES">Mini-série</option>
+                            </select>
+                        </div>
+                        <button id="reset-filters" class="btn btn-secondary">Limpar Filtros</button>
+                    </div>
+                </div>
+
+                <div id="loading-spinner" class="spinner hidden">
+                    <div class="spinner-content">
+                        <div class="spinner-circle"></div>
+                        <p>Carregando títulos...</p>
+                    </div>
+                </div>
+
+                <div id="error-message" class="error-message hidden"></div>
+
+                <div id="titles-grid" class="titles-grid">
+                </div>
+
+                <div id="pagination" class="pagination">
+                </div>
+            </div>
+        </section>
+
+        <section id="details" class="page">
+            <div class="container">
+                <button id="back-button" class="btn btn-secondary">← Voltar</button>
+                <div id="details-content">
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="page">
+            <div class="container">
+                <h2>Sobre a Equipe</h2>
+                <div class="team-grid">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Catálogo de Filmes e Séries. Desenvolvido por <span id="team-names">Equipe de Desenvolvimento</span></p>
+            <p>Dados fornecidos pela <a href="https://imdbapi.dev/" target="_blank">IMDb API</a></p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
