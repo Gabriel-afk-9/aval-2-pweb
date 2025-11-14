@@ -1,5 +1,7 @@
 class Card extends HTMLElement {
   connectedCallback() {
+    const id = this.getAttribute("id");
+    const media_type = this.getAttribute("media_type");
     const title = this.getAttribute("title");
     const poster = this.getAttribute("poster");
     const rate = this.getAttribute("rate");

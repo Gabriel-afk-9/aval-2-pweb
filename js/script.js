@@ -1,10 +1,29 @@
 import { renderCards } from "./renderCards.js";
 import { getSearch } from "./search.js";
+import { getSearchId } from "./searchById.js";
+import { renderICardsDetails } from "./renderICardsDetails.js";
 import "../pages/home.js";
 import "../pages/search.js";
 import "../components/card.js";
 
 let local = "home";
+
+async function showItem(container) {
+  container.childNodes.forEach(element => {
+    element.addEventListener('click', async () => {
+      const id = element.getAttribute('id')
+      const media_type = element.getAttribute('media_type')
+      const data = await getSearchId(id, media_type)
+      const searchPage = document.querySelector("search-page");
+      const container = document.querySelector(".search-page .cards-container");
+      
+      renderICardsDetails(container, data)
+      searchPage.style.display = "flex"
+      console.log(data)
+    })
+  });
+
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const search = document.getElementById("search");
@@ -15,6 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchPage = document.querySelector("search-page");
 
   searchPage.style.display = "none";
+
+
 
   search.addEventListener("input", async (e) => {
     const value = e.target.value.trim();
@@ -27,8 +48,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const result = await getSearch(value, local);
 
-    const container = document.querySelector(".search-page .cards-container");
-
+    const container = document.querySelector(".search-page .cards-details-container");
     renderCards(container, result.results);
+    
+    container.childNodes.forEach(element => {
+    element.addEventListener('click', async () => {
+      const id = element.getAttribute('id')
+      const media_type = element.getAttribute('media_type')
+      const data = await getSearchId(id, media_type)
+      const searchPage = document.querySelector("search-page");
+      const container = document.querySelector(".search-page .cards-details-container");
+      
+      renderICardsDetails(container, data)
+      searchPage.style.display = "flex"
+      console.log(data)
+    })
+  })
+
+
   })
 })
