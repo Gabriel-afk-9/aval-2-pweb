@@ -3,10 +3,15 @@ import { getSearch } from "./search.js";
 import "../pages/home.js";
 import "../pages/search.js";
 import "../components/card.js";
+import "../components/loadingSpinner.js";
+import { LoadPopular } from "./loadPopular.js";
 
 let local = "home";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const loadingSpinner = document.querySelector("loading-spinner");
+  loadingSpinner.style.display = "none";
+  
   const search = document.getElementById("search");
 
   const homePage = document.querySelector("home-page");
@@ -30,5 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".search-page .cards-container");
 
     renderCards(container, result.results);
-  })
+  });
+
+  LoadPopular.movies();
 })
