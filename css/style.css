@@ -65,8 +65,8 @@ card-component:hover {
 
 .card-img {
   width: 100%;
-  height: 300px; /* Altura fixa para a imagem */
-  object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
+  height: 300px;
+  object-fit: cover;
   border-bottom: 1px solid #323743;
 }
 
@@ -82,13 +82,12 @@ card-component:hover {
   font-weight: 700;
   margin-top: 0;
   margin-bottom: 0.5rem;
-  /* Limita o título a duas linhas e adiciona reticências */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 2.2em; /* Aproximadamente 2 linhas */
+  height: 2.2em;
 }
 
 .card-release,
@@ -100,10 +99,8 @@ card-component:hover {
 
 .card-rate {
   font-weight: 600;
-  color: #427ffaff; /* Cor de destaque para a avaliação */
 }
 
-/* Estilos para as Páginas (Home, Search, etc.) */
 .home-page,
 .movies-page,
 .tvSeries-page,
@@ -116,13 +113,6 @@ card-component:hover {
   width: 100%;
 }
 
-.home-page h2,
-.search-page h2 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
-
-/* Estilos do Header e Media Queries (Mantidos do seu CSS original) */
 .header {
   width: 100%;
   height: 5rem;
@@ -207,6 +197,84 @@ card-component:hover {
 .search-button:disabled,
 .menu-button:disabled {
   opacity: 0.4;
+}
+
+.popular-title {
+  position: relative;
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.popular-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 75%;
+  height: 0.3rem;
+  background: linear-gradient(90deg,
+    #fc3a3a,
+    #08f194,
+    #0468f5,
+    #ee078e,
+    #fc3a3a,
+    #fc3a3a
+  );
+  border-radius: 2px;
+  z-index: -1;
+}
+
+.popular-container {
+  position: relative;
+  width: 70%;
+  height: 20rem;
+  border-radius: 1rem;
+  background-color: white;
+}
+
+@property --angle{
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.popular-container::after, .popular-container::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: conic-gradient(
+    from var(--angle),
+    #fc3a3a,
+    #08f194,
+    #0468f5,
+    #ee078e,
+    #fc3a3a,
+    #fc3a3a
+  );
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  padding: 0.3rem;
+  border-radius: 1.3rem;
+  animation: spin 6s linear infinite;
+}
+
+.popular-container::before {
+  filter: blur(1.5em);
+  opacity: 0.5;
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+
+  to {
+    --angle: 360deg;
+  }
 }
 
 @media (min-width: 768px) {
