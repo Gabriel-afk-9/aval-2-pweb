@@ -10,9 +10,6 @@ import { LoadPopular } from "./loadPopular.js";
 
 let local = "home";
 
-// -------------------------------------------------------------------
-// 🔥 Função unificada que trata o clique dos cards (dos dois códigos)
-// -------------------------------------------------------------------
 async function enableCardClick(container) {
   container.childNodes.forEach(element => {
     element.addEventListener("click", async () => {
@@ -48,9 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   searchPage.style.display = "none";
 
-  // -------------------------------------------------------------------
-  // 🔍 INPUT DE BUSCA (baseado nos 2 códigos, unificado)
-  // -------------------------------------------------------------------
   search.addEventListener("input", async (e) => {
     const value = e.target.value.trim();
 
@@ -72,8 +66,5 @@ document.addEventListener("DOMContentLoaded", () => {
     enableCardClick(container);
   });
 
-  // -------------------------------------------------------------------
-  // 🔥 Conteúdos populares ao iniciar
-  // -------------------------------------------------------------------
   LoadPopular.movies();
 });
