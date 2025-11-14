@@ -10,11 +10,12 @@ import { LoadPopular } from "./loadPopular.js";
 
 let local = "home";
 
-// Função para abrir detalhes do item
+// -------------------------------------------------------------------
+// 🔥 Função unificada que trata o clique dos cards (dos dois códigos)
+// -------------------------------------------------------------------
 async function enableCardClick(container) {
   container.childNodes.forEach(element => {
     element.addEventListener("click", async () => {
-
       const id = element.getAttribute("id");
       const media_type = element.getAttribute("media_type");
 
@@ -23,9 +24,13 @@ async function enableCardClick(container) {
       const searchPage = document.querySelector("search-page");
       const detailsContainer = document.querySelector(".search-page .cards-details-container");
 
+      // renderiza os detalhes
       renderICardsDetails(detailsContainer, data);
 
+      // mostra o container de detalhes
       searchPage.style.display = "flex";
+
+      console.log(data);
     });
   });
 }
@@ -43,7 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   searchPage.style.display = "none";
 
-  // 🔍 INPUT DE BUSCA
+  // -------------------------------------------------------------------
+  // 🔍 INPUT DE BUSCA (baseado nos 2 códigos, unificado)
+  // -------------------------------------------------------------------
   search.addEventListener("input", async (e) => {
     const value = e.target.value.trim();
 
@@ -55,14 +62,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const result = await getSearch(value, local);
 
+    // Usa o container de cards (lista)
     const container = document.querySelector(".search-page .cards-container");
 
+    // Renderiza lista
     renderCards(container, result.results);
 
-    // habilitar clique em todos os cards
+    // Ativa clique para abrir detalhes
     enableCardClick(container);
   });
 
-  // 🔥 Carregar conteúdos populares ao abrir a página
+  // -------------------------------------------------------------------
+  // 🔥 Conteúdos populares ao iniciar
+  // -------------------------------------------------------------------
   LoadPopular.movies();
 });
