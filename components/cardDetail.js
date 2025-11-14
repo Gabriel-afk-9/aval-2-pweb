@@ -7,10 +7,9 @@ class CardDetails extends HTMLElement {
     const rate = this.getAttribute("rate");
     const release = this.getAttribute("release");
     const overview = this.getAttribute('overview');
-    // const seasons = this.getAttribute("seasons")
 
     this.innerHTML = `
-      <div class=".card-detail">
+      <div class="card-detail">
         <img src="${poster}" alt="${title}" class="card-img"/>
         <div class="card-detail-body">
           <h3 class="card-detail-title">${title}</h3>

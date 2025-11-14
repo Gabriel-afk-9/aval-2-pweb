@@ -10,7 +10,7 @@ export function renderICardsDetails(container, data) {
     const poster = data.poster_path
       ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
       : "assets/no-image.png";
-    const genresOj = data.genres;
+    const genresOj = data.genres || [];
     console.log(genresOj)
     const genrersName = genresOj.map(element => element = element.name);
     const seasons = data.seasons;
@@ -30,4 +30,3 @@ export function renderICardsDetails(container, data) {
 
     container.appendChild(card_details);
   };
-

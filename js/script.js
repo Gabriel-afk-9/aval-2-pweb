@@ -10,30 +10,10 @@ import { LoadPopular } from "./loadPopular.js";
 
 let local = "home";
 
-// Função para abrir detalhes do item
-async function enableCardClick(container) {
-  container.childNodes.forEach(element => {
-    element.addEventListener("click", async () => {
-
-      const id = element.getAttribute("id");
-      const media_type = element.getAttribute("media_type");
-
-      const data = await getSearchId(id, media_type);
-
-      const searchPage = document.querySelector("search-page");
-      const detailsContainer = document.querySelector(".search-page .cards-details-container");
-
-      renderICardsDetails(detailsContainer, data);
-
-      searchPage.style.display = "flex";
-    });
-  });
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   const loadingSpinner = document.querySelector("loading-spinner");
   loadingSpinner.style.display = "none";
-
+  
   const search = document.getElementById("search");
 
   const homePage = document.querySelector("home-page");
@@ -43,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   searchPage.style.display = "none";
 
-  // 🔍 INPUT DE BUSCA
   search.addEventListener("input", async (e) => {
     const value = e.target.value.trim();
 
@@ -55,14 +34,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const result = await getSearch(value, local);
 
-    const container = document.querySelector(".search-page .cards-container");
+    const container = document.querySelector(".search-page .cards-details-container");
 
     renderCards(container, result.results);
 
-    // habilitar clique em todos os cards
-    enableCardClick(container);
+    container.childNodes.forEach(element => {
+      element.addEventListener('click', async () => {
+        const id = element.getAttribute('id')
+        const media_type = element.getAttribute('media_type')
+        const data = await getSearchId(id, media_type)
+        const searchPage = document.querySelector("search-page");
+        const container = document.querySelector(".search-page .cards-details-container");
+        
+        renderICardsDetails(container, data)
+        searchPage.style.display = "flex"
+        console.log(data)
+      })
+    })
   });
 
-  // 🔥 Carregar conteúdos populares ao abrir a página
   LoadPopular.movies();
-});
+})
