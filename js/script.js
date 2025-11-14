@@ -13,10 +13,10 @@ let local = "home";
 // Função para abrir detalhes do item
 async function enableCardClick(container) {
   container.childNodes.forEach(element => {
-    element.addEventListener('click', async () => {
+    element.addEventListener("click", async () => {
 
-      const id = element.getAttribute('id');
-      const media_type = element.getAttribute('media_type');
+      const id = element.getAttribute("id");
+      const media_type = element.getAttribute("media_type");
 
       const data = await getSearchId(id, media_type);
 
