@@ -25,29 +25,25 @@ body {
   }
 }
 
-/* Estilos do Container de Cards */
-.cards-container {
+.cards-container ,.cards-details-container {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
   padding: 2rem;
   justify-content: center;
   width: 90%;
-  margin: 0 auto; /* Centraliza o container */
+  margin: 0 auto;
 }
 
-/* Estilos do Componente Card */
 card-component {
-  /* O componente customizado é um elemento inline por padrão,
-     torná-lo block ou flex para que as dimensões funcionem */
   display: block;
-  width: 200px; /* Largura do card */
-  height: auto; /* Altura ajustável */
+  width: 200px;
+  height: auto;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease-in-out;
-  background-color: #1e2127; /* Fundo escuro para o card */
+  background-color: #1e2127;
   color: white;
 }
 

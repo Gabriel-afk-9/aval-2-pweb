@@ -10,32 +10,10 @@ import { LoadPopular } from "./loadPopular.js";
 
 let local = "home";
 
-async function enableCardClick(container) {
-  container.childNodes.forEach(element => {
-    element.addEventListener("click", async () => {
-      const id = element.getAttribute("id");
-      const media_type = element.getAttribute("media_type");
-
-      const data = await getSearchId(id, media_type);
-
-      const searchPage = document.querySelector("search-page");
-      const detailsContainer = document.querySelector(".search-page .cards-details-container");
-
-      // renderiza os detalhes
-      renderICardsDetails(detailsContainer, data);
-
-      // mostra o container de detalhes
-      searchPage.style.display = "flex";
-
-      console.log(data);
-    });
-  });
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   const loadingSpinner = document.querySelector("loading-spinner");
   loadingSpinner.style.display = "none";
-
+  
   const search = document.getElementById("search");
 
   const homePage = document.querySelector("home-page");
@@ -56,15 +34,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const result = await getSearch(value, local);
 
-    // Usa o container de cards (lista)
-    const container = document.querySelector(".search-page .cards-container");
+    const container = document.querySelector(".search-page .cards-details-container");
 
-    // Renderiza lista
     renderCards(container, result.results);
 
-    // Ativa clique para abrir detalhes
-    enableCardClick(container);
+    container.childNodes.forEach(element => {
+      element.addEventListener('click', async () => {
+        const id = element.getAttribute('id')
+        const media_type = element.getAttribute('media_type')
+        const data = await getSearchId(id, media_type)
+        const searchPage = document.querySelector("search-page");
+        const container = document.querySelector(".search-page .cards-details-container");
+        
+        renderICardsDetails(container, data)
+        searchPage.style.display = "flex"
+        console.log(data)
+      })
+    })
   });
 
   LoadPopular.movies();
-});
+})
