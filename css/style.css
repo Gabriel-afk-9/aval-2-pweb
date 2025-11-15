@@ -4,6 +4,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 }
 
 body {
@@ -25,7 +26,8 @@ body {
   }
 }
 
-.cards-container ,.cards-details-container {
+.cards-container,
+.cards-details-container {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
@@ -212,48 +214,91 @@ card-component:hover {
   opacity: 0.4;
 }
 
-.popular-title, .more-title {
+.popular-title,
+.more-title,
+.categories-title {
   position: relative;
   display: inline-block;
   font-size: 2rem;
   font-weight: bold;
   color: white;
-  margin: 0.5rem 0 1rem 19rem;
+  margin: 0.5rem 0 1rem 2rem;
 }
 
 .more-title {
-  margin: 3rem 0 1rem 19rem;
+  margin: 3rem auto 1rem auto;
+  font-size: 3rem;
+  background: linear-gradient(45deg, #1e2127, #323743);
+  border-radius: 1rem;
+  padding: 1rem;
+  text-transform: uppercase;
+  text-align: center;
+  width: 70%;
 }
 
-.popular-title::after, .more-title::after {
+.popular-title::after,
+.categories-title::after {
   content: "";
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 25%;
+  width: 50%;
   height: 0.3rem;
-  background: linear-gradient(90deg,
-    #fc3a3a,
-    #08f194,
-    #0468f5,
-    #ee078e,
-    #fc3a3a,
-    #fc3a3a
+  background: linear-gradient(
+    90deg,
+    #00008b,
+    #0000cd,
+    #0000ff,
+    #1e90ff,
+    #4169e1,
+    #4682b4,
+    #5f9ea0,
+    #6495ed
   );
   border-radius: 2px;
   z-index: -1;
 }
 
+.categories-title::after {
+  width: 35%;
+}
+
+.more-title::after {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: conic-gradient(
+    from var(--angle),
+    #1e90ff,
+    #4682b4,
+    #5f9ea0,
+    #6495ed
+  );
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  padding: 0.5rem;
+  border-radius: 1.3rem;
+  animation: spin 20s linear infinite;
+}
+
 .popular-container {
   position: relative;
-  width: 50%;
-  height: 20rem;
+  width: 90%;
+  height: 13rem;
   border-radius: 1rem;
-  background: linear-gradient(45deg, rgba(23, 26, 31, 1), rgba(255, 255, 255, 0.1));
-  background-size: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(23, 26, 31, 1),
+    rgba(255, 255, 255, 0.1)
+  );
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   margin: 0 auto;
+  aspect-ratio: 3 / 1;
 }
 
 .zoom-animation {
@@ -268,22 +313,81 @@ card-component:hover {
 
 .details-animation {
   animation: details 1s ease-in;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 60%;
 }
 
 .popular-details h2 {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 5vw, 3rem);
   margin: 0;
-  -webkit-text-stroke: 0.5px black;
 }
 
 .popular-details p {
-  font-size: 1rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  font-size: clamp(0.5rem, 5vw, 1rem);
   margin: 0;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .popular-counter {
   display: flex;
   gap: 1rem;
+}
+
+.categories-container {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(10rem, 10rem);
+  grid-template-rows: repeat(2, 8rem);
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem;
+  height: calc(2 * 8rem + 1rem);
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  margin: 0 2rem;
+}
+
+.categories-container::-webkit-scrollbar {
+  height: 0.6rem;
+}
+.categories-container::-webkit-scrollbar-thumb {
+  background: #427ffa;
+  border-radius: 10rem;
+}
+
+genre-card {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 1rem;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+}
+
+.genre-name {
+  position: absolute;
+  margin: 0;
+  font-weight: bold;
+  font-size: clamp(1rem, 5vw, 3rem);
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 0.2rem 0.4rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 0.4rem;
 }
 
 .loading-spinner {
@@ -294,25 +398,36 @@ card-component:hover {
   background-color: transparent;
 }
 
-@property --angle{
+@property --angle {
   syntax: "<angle>";
   initial-value: 0deg;
   inherits: false;
 }
 
-.popular-container::after, .popular-container::before {
+.popular-container::after,
+.popular-container::before {
   content: "";
   position: absolute;
   height: 100%;
   width: 100%;
   background-image: conic-gradient(
     from var(--angle),
-    #fc3a3a,
-    #08f194,
-    #0468f5,
-    #ee078e,
-    #fc3a3a,
-    #fc3a3a
+    #00008b,
+    #0000cd,
+    #0000ff,
+    #1e90ff,
+    #4169e1,
+    #4682b4,
+    #5f9ea0,
+    #6495ed,
+    #5f9ea0,
+    #4682b4,
+    #4169e1,
+    #4682b4,
+    #1e90ff,
+    #0000ff,
+    #0000cd,
+    #00008b
   );
   top: 50%;
   left: 50%;
@@ -417,6 +532,25 @@ card-component:hover {
 
   .search-button {
     display: none;
+  }
+
+  .popular-title {
+    margin: 0.5rem 0 1rem 7rem;
+  }
+
+  .popular-container {
+    width: 70%;
+  }
+
+  .more-title {
+    width: min-content;
+    margin: 5rem auto;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .categories-title {
+    margin: 0.5rem 0 1rem 7rem;
   }
 }
 

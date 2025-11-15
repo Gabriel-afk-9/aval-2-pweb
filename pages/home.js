@@ -9,6 +9,10 @@ class HomePage extends HTMLElement {
         </div>
         
         <h2 class="more-title">Mais para explorar</h2>
+
+        <h2 class="categories-title">Categorias</h2>
+        <div class="categories-container"></div>
+
         <div class="cards-container"></div>
       </div>
     `
