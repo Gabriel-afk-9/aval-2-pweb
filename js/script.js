@@ -7,6 +7,7 @@ import "../pages/search.js";
 import "../pages/moviesByCategory.js";
 import "../components/card.js";
 import "../components/loadingSpinner.js";
+import "../components/sideBar.js";
 import { LoadPopular } from "./loadPopular.js";
 import { renderCategories } from "./renderCategories.js";
 import { loadMoviesByCategory } from "./loadMoviesByCategory.js";
@@ -16,6 +17,8 @@ let local = "home";
 document.addEventListener("DOMContentLoaded", () => {
   const loadingSpinner = document.querySelector("loading-spinner");
   loadingSpinner.style.display = "none";
+
+  const sideBar = document.querySelector("side-bar");
   
   const searchPage = document.querySelector("search-page");
   searchPage.style.display = "none";
@@ -24,6 +27,14 @@ document.addEventListener("DOMContentLoaded", () => {
   moviesByCategory.style.display = "none";
   
   const homePage = document.querySelector("home-page");
+
+  const titleHeader = document.getElementById("title-container");
+  titleHeader.addEventListener("click", () => {
+    searchPage.style.display = "none";
+    moviesByCategory.style.display = "none";
+
+    homePage.style.display = "flex";
+  });
   
   const search = document.getElementById("search");
   search.addEventListener("input", async (e) => {
@@ -59,6 +70,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   LoadPopular.movies();
 
+  const menuButton = document.getElementById("menu-button");
+  let isOpen = false;
+
+  menuButton.addEventListener("click", () => {
+    isOpen = !isOpen;
+
+    isOpen ? menuButton.classList.add("toggled") : menuButton.classList.remove("toggled");
+    sideBar.toggle();
+  })
 })
 
 customElements.whenDefined("home-page").then(() => {
