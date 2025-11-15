@@ -13,7 +13,7 @@ export function renderCards(container, data) {
     const title = item.title || item.name || "Título indisponível";
     const poster = item.poster_path
       ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-      : "../assets/image-not-found.png";
+      : "./assets/image-not-found.png";
     const release = item.release_date || item.first_air_date || "—";
     
     const rawRate = item.vote_average ?? item.popularity;
