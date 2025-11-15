@@ -27,6 +27,7 @@ body {
 }
 
 .cards-container,
+.movies-container,
 .cards-details-container {
   display: flex;
   flex-wrap: wrap;
@@ -216,6 +217,7 @@ card-component:hover {
 
 .popular-title,
 .more-title,
+.category-title,
 .categories-title {
   position: relative;
   display: inline-block;
@@ -223,6 +225,14 @@ card-component:hover {
   font-weight: bold;
   color: white;
   margin: 0.5rem 0 1rem 2rem;
+}
+
+.category-title {
+  text-transform: capitalize;
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+  margin: 0.5rem auto;
 }
 
 .more-title {
@@ -535,11 +545,16 @@ genre-card {
   }
 
   .popular-title {
-    margin: 0.5rem 0 1rem 7rem;
+    margin: 0.5rem 0 1rem 12rem;
+  }
+
+  .popular-title::after {
+    width: 20%;
   }
 
   .popular-container {
     width: 70%;
+    height: 25rem;
   }
 
   .more-title {
@@ -550,7 +565,15 @@ genre-card {
   }
 
   .categories-title {
-    margin: 0.5rem 0 1rem 7rem;
+    margin: 0.5rem 0 1rem 2rem;
+  }
+
+  .categories-title::after {
+    width: 9%;
+  }
+
+  .genre-name {
+    font-size: clamp(1rem, 5vw, 1rem);
   }
 }
 
