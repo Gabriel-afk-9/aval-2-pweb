@@ -9,6 +9,7 @@ import "../components/card.js";
 import "../components/loadingSpinner.js";
 import { LoadPopular } from "./loadPopular.js";
 import { renderCategories } from "./renderCategories.js";
+import { loadMoviesByCategory } from "./loadMoviesByCategory.js";
 
 let local = "home";
 
@@ -27,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const search = document.getElementById("search");
   const searchDropdown = document.getElementById("searchDropdown");
   const homePage = document.querySelector("home-page");
+  
   const searchPage = document.querySelector("search-page");
   const moviesByCategory = document.querySelector("movies-by-category");
   const homeButton = document.getElementById("home-button");
@@ -67,6 +69,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const handleSearchInput = async (e) => {
+
+  const moviesByCategory = document.querySelector("movies-by-category");
+  moviesByCategory.style.display = "none";
+  
+  const homePage = document.querySelector("home-page");
+  
+  const search = document.getElementById("search");
+  search.addEventListener("input", async (e) => {
     const value = e.target.value.trim();
 
     if (value === "") {
@@ -170,6 +180,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   LoadPopular.movies();
 });
+
+})
 
 customElements.whenDefined("home-page").then(() => {
   renderCategories();
