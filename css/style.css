@@ -131,6 +131,7 @@ card-component:hover {
   display: flex;
   flex-direction: column;
   height: 100%;
+  position: relative;
 }
 
 .card-img {
@@ -169,6 +170,24 @@ card-component:hover {
 
 .card-rate {
   font-weight: 600;
+}
+
+.card-media {
+  width: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  position: absolute;
+  top: 0.3rem;
+  left: 0.3rem;
+}
+
+.media-type {
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 0;
 }
 
 .home-page,
@@ -305,6 +324,7 @@ card-component:hover {
   width: 50%;
   height: 20rem;
   border-radius: 1rem;
+  background: linear-gradient(45deg, rgba(23, 26, 31, 1), rgba(255, 255, 255, 0.1));
   background-size: 100%;
   background-size: cover;
   background-position: center;
@@ -336,12 +356,17 @@ card-component:hover {
   margin: 0;
 }
 
+.popular-counter {
+  display: flex;
+  gap: 1rem;
+}
+
 .loading-spinner {
   width: 1rem;
   height: 1rem;
   border-radius: 100rem;
   border: 5px solid white;
-  background-color: blue;
+  background-color: transparent;
 }
 
 @property --angle{
