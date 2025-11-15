@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const isEmpty = value === "";
     homePage.style.display = isEmpty ? "flex" : "none";
     searchPage.style.display = isEmpty ? "none" : "flex";
+    moviesByCategory.style.display = "none";
 
     if (isEmpty) return;
 
