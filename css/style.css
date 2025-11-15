@@ -302,7 +302,7 @@ card-component:hover {
 
 .more-title {
   margin: 3rem auto 1rem auto;
-  font-size: 3rem;
+  font-size: 2rem;
   background: linear-gradient(45deg, #1e2127, #323743);
   border-radius: 1rem;
   padding: 1rem;
@@ -354,7 +354,7 @@ card-component:hover {
   left: 50%;
   translate: -50% -50%;
   z-index: -1;
-  padding: 0.5rem;
+  padding: 0.3rem;
   border-radius: 1.3rem;
   animation: spin 20s linear infinite;
 }
@@ -619,7 +619,7 @@ genre-card {
 
   .more-title {
     width: min-content;
-    margin: 5rem auto;
+    margin: 4rem auto;
     text-align: center;
     white-space: nowrap;
   }
@@ -637,3 +637,4 @@ genre-card {
     transform: rotate(360deg);
   }
 }
+
