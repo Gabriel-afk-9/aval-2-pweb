@@ -7,6 +7,7 @@ import "../pages/search.js";
 import "../components/card.js";
 import "../components/loadingSpinner.js";
 import { LoadPopular } from "./loadPopular.js";
+import { renderCategories } from "./renderCategories.js";
 
 let local = "home";
 
@@ -55,3 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   LoadPopular.movies();
 })
+
+customElements.whenDefined("home-page").then(() => {
+  renderCategories();
+});
