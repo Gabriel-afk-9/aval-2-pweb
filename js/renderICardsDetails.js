@@ -18,7 +18,7 @@ export function renderICardsDetails(container, data) {
     const overview = data.overview || "Sinopse indisponível"
     const poster = data.poster_path
       ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
-      : "./assets/no-image.png";
+      : "../assets/image-not-found.png";
     const genresObj = data.genres || [];
     console.log(genresObj)
     const genrersName = genresObj.map(element => element = element.name);

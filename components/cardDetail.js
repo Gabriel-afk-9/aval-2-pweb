@@ -10,16 +10,21 @@ class CardDetails extends HTMLElement {
     const overview = this.getAttribute('overview');
 
     this.innerHTML = `
+      
       <div class="card-detail">
-        <img src="${poster}" alt="${title}" class="card-img"/>
+        <h3 class="card-detail-title">${title}</h3>
+        
         <div class="card-detail-body">
-          <h3 class="card-detail-title">${title}</h3>
-          <p class="card-detail-release">Lançamento: ${release}</p>
-          <p>${overview}</p>
-          <p id="genrers"><p>          
-          <p class="card-detail-rate">Avaliação: ${rate}</p>
-          <div id="seasons"><div>
+            <img src="${poster}" alt="${title}" class="card-detail-img"/>
+            <div class="card-detail-main-info">
+            <p class="card-detail-release"><strong>Lançamento: </strong>${release}</p>
+            <p class="card-detail-overview"><strong>Sinopse: </strong>${overview}</p>
+            <div id="genrers" class="card-details-genres"></div>          
+            <p class="card-detail-rate" class="class-detail-avaliation"><strong>Avaliação⭐: </strong>${rate}</p>
+            </div>
+
         </div>
+        <div id="seasons" class="class-detail-seasons"><div>
       </div>
     `;
     const genresParagra = document.getElementById('genrers')
@@ -30,8 +35,10 @@ class CardDetails extends HTMLElement {
 
     genresArray.forEach(element => {
       if (genresArray.length > 0) {
-        const genre = document.createElement("p");
-        genre.textContent = element
+        const genre = document.createElement("div");
+        const genreName = document.createElement("p")
+        genreName.textContent = element
+        genre.appendChild(genreName)
         genresParagra.appendChild(genre)
       }
     })
@@ -45,7 +52,7 @@ class CardDetails extends HTMLElement {
         season.setAttribute('state', '0')
         season.setAttribute('data-index', add);
 
-        seasonsName.textContent = `Temporada ${add + 1}:`
+        seasonsName.textContent = `Temporada ${add + 1}  🠲`
         season.appendChild(seasonsName)
         seasonsParagra.appendChild(season)
 
@@ -58,7 +65,6 @@ class CardDetails extends HTMLElement {
       element.addEventListener('click', () => {
         const state = element.getAttribute('state')
         const dataIndex = element.getAttribute('data-index')
-        console.log('entrei')
         if (state == '0') {
           for (let x = 0; x < parseInt(episodesArray[dataIndex], 10); x++) {
             console.log(parseInt(episodesArray[x], 10))
@@ -80,6 +86,8 @@ class CardDetails extends HTMLElement {
 
       })
     })
+
+    seasonsParagra.firstChild.hidden = true;
 
   }
 }
