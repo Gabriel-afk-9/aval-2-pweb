@@ -1,4 +1,3 @@
-
 class CardDetails extends HTMLElement {
   connectedCallback() {
     const title = this.getAttribute("title");

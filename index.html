@@ -10,7 +10,7 @@
 </head>
 <body>
     <header class="header">
-        <div class="title-container">
+        <div class="title-container" id="home-button">
             <div class="icon-container">
                 <img src="./assets/lucide-Clapperboard-Outlined.svg" alt="icon" class="icon">
             </div>
@@ -19,7 +19,8 @@
 
         <div class="buttons-container">
             <div class="search-wrapper">
-                <input type="text" class="search" placeholder="Pesquisar..." id="search" >
+                <input type="text" id="search" class="search" placeholder="Buscar filmes e séries..." autocomplete="off" />
+                <ul id="searchDropdown" class="search-dropdown"></ul>
             </div>
 
             <button class="search-button" type="button">
