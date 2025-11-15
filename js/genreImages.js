@@ -1,0 +1,21 @@
+export const GenreImages = {
+  action: "../assets/genreImages/action.png",
+  adventure: "../assets/genreImages/adventure.png",
+  animation: "../assets/genreImages/animation.png",
+  comedy: "../assets/genreImages/comedy.png",
+  crime: "../assets/genreImages/crime.png",
+  documentary: "../assets/genreImages/documentary.png",
+  drama: "../assets/genreImages/drama.png",
+  family: "../assets/genreImages/family.png",
+  fantasy: "../assets/genreImages/fantasy.png",
+  history: "../assets/genreImages/history.png",
+  horror: "../assets/genreImages/horror.png",
+  mystery: "../assets/genreImages/mystery.png",
+  music: "../assets/genreImages/music.png",
+  romance: "../assets/genreImages/romance.png",
+  science_fiction: "../assets/genreImages/science_fiction.png",
+  thriller: "../assets/genreImages/thriller.png",
+  tv_movie: "../assets/genreImages/tv_movie.png",
+  war: "../assets/genreImages/war.png",
+  western: "../assets/genreImages/western.png"
+};
