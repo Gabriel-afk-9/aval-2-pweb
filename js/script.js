@@ -4,10 +4,12 @@ import { getSearchId } from "./searchById.js";
 import { renderICardsDetails } from "./renderICardsDetails.js";
 import "../pages/home.js";
 import "../pages/search.js";
+import "../pages/moviesByCategory.js";
 import "../components/card.js";
 import "../components/loadingSpinner.js";
 import { LoadPopular } from "./loadPopular.js";
 import { renderCategories } from "./renderCategories.js";
+import { loadMoviesByCategory } from "./loadMoviesByCategory.js";
 
 let local = "home";
 
@@ -15,15 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadingSpinner = document.querySelector("loading-spinner");
   loadingSpinner.style.display = "none";
   
-  const search = document.getElementById("search");
-
-  const homePage = document.querySelector("home-page");
-  const moviesPage = document.querySelector("movies-page");
-  const tvSeriesPage = document.querySelector("tvSeries-page");
   const searchPage = document.querySelector("search-page");
-
   searchPage.style.display = "none";
 
+  const moviesByCategory = document.querySelector("movies-by-category");
+  moviesByCategory.style.display = "none";
+  
+  const homePage = document.querySelector("home-page");
+  
+  const search = document.getElementById("search");
   search.addEventListener("input", async (e) => {
     const value = e.target.value.trim();
 
@@ -55,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   LoadPopular.movies();
+
 })
 
 customElements.whenDefined("home-page").then(() => {

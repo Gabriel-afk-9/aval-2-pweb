@@ -25,7 +25,14 @@ class Card extends HTMLElement {
     `;
 
     const media = this.querySelector(".card-media");
-    if (media) media.style.backgroundColor = bgColor;
+    if (!media) return;
+
+    if (bgColor == "transparent") {
+      media.style.display = "none";
+      return;
+    }
+
+    media.style.backgroundColor = bgColor;
   }
 }
 customElements.define("card-component", Card);
