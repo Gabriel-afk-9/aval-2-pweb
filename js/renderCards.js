@@ -25,6 +25,7 @@ export function renderCards(container, data) {
     card.setAttribute("rate", rate);
     card.setAttribute("id", item.id);
     card.setAttribute("media_type", item.media_type);
+    card.setAttribute("bgcolor", item.media_type == "movie" ? "#0468f5" : "green");
 
     container.appendChild(card);
   });

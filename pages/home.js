@@ -5,6 +5,7 @@ class HomePage extends HTMLElement {
         <h2 class="popular-title">Os mais populares</h2>
         <div class="popular-container">
           <div class="popular-details"></div>
+          <div class="popular-counter"></div>
         </div>
         
         <h2 class="more-title">Mais para explorar</h2>
