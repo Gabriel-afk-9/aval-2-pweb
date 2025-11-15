@@ -9,57 +9,167 @@ import "../components/card.js";
 import "../components/loadingSpinner.js";
 import { LoadPopular } from "./loadPopular.js";
 import { renderCategories } from "./renderCategories.js";
-import { loadMoviesByCategory } from "./loadMoviesByCategory.js";
 
 let local = "home";
+
+function debounce(func, delay) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const loadingSpinner = document.querySelector("loading-spinner");
   loadingSpinner.style.display = "none";
-  
-  const searchPage = document.querySelector("search-page");
-  searchPage.style.display = "none";
 
-  const moviesByCategory = document.querySelector("movies-by-category");
-  moviesByCategory.style.display = "none";
-  
-  const homePage = document.querySelector("home-page");
-  
   const search = document.getElementById("search");
-  search.addEventListener("input", async (e) => {
-    const value = e.target.value.trim();
+  const searchDropdown = document.getElementById("searchDropdown");
+  const homePage = document.querySelector("home-page");
+  const searchPage = document.querySelector("search-page");
+  const moviesByCategory = document.querySelector("movies-by-category");
+  const homeButton = document.getElementById("home-button");
 
-    const isEmpty = value === "";
-    homePage.style.display = isEmpty ? "flex" : "none";
-    searchPage.style.display = isEmpty ? "none" : "flex";
+  searchPage.style.display = "none";
+  moviesByCategory.style.display = "none";
+
+  function goToHome() {
+    homePage.style.display = "flex";
+    searchPage.style.display = "none";
     moviesByCategory.style.display = "none";
 
-    if (isEmpty) return;
+    if (search) search.value = '';
+    if (searchDropdown) {
+      searchDropdown.innerHTML = '';
+      searchDropdown.style.display = 'none';
+    }
+  }
+  
+  if (homeButton) {
+    homeButton.addEventListener('click', goToHome);
+  }
+
+  if (searchPage) {
+    searchPage.addEventListener('click', (e) => {
+      if (e.target.closest('#details-back-button')) {
+        goToHome();
+      }
+
+      if (moviesByCategory) {
+    moviesByCategory.addEventListener('click', (e) => {
+      if (e.target.closest('#category-back-button')) {
+        goToHome();
+      }
+    });
+  }
+    });
+  }
+
+  const handleSearchInput = async (e) => {
+    const value = e.target.value.trim();
+
+    if (value === "") {
+      searchDropdown.innerHTML = '';
+      searchDropdown.style.display = 'none';
+      homePage.style.display = "flex";
+      searchPage.style.display = "none";
+      moviesByCategory.style.display = "none";
+      return;
+    }
+
+    searchDropdown.innerHTML = '<li class="dropdown-loading">Buscando...</li>';
+    searchDropdown.style.display = 'block';
 
     const result = await getSearch(value, local);
+    searchDropdown.innerHTML = '';
 
-    const container = document.querySelector(".search-page .cards-details-container");
+    const validResults = result.results.filter(
+      item => item.media_type === 'movie' || item.media_type === 'tv'
+    );
 
-    renderCards(container, result.results);
+    if (validResults.length === 0) {
+      searchDropdown.innerHTML = '<li class="dropdown-no-result">Nenhum resultado encontrado.</li>';
+      searchDropdown.style.display = 'block';
+      return;
+    }
 
-    container.childNodes.forEach(element => {
-      element.addEventListener('click', async () => {
-        const id = element.getAttribute('id')
-        const media_type = element.getAttribute('media_type')
-        const data = await getSearchId(id, media_type)
-        const searchPage = document.querySelector("search-page");
-        const container = document.querySelector(".search-page .cards-details-container");
+    validResults.slice(0, 6).forEach(item => {
+      const li = document.createElement('li');
+      li.classList.add('dropdown-item');
+      
+      const posterUrl = item.poster_path 
+        ? `https://image.tmdb.org/t/p/w92${item.poster_path}`
+        : './assets/image-not-found.png';
+      
+      const title = item.title || item.name || "Título indisponível";
+      const year = (item.release_date || item.first_air_date || '').split('-')[0];
+      const type = item.media_type === 'movie' ? 'filme' : 'série';
+      
+      const rawRate = item.vote_average ?? item.popularity;
+      const rate = (typeof rawRate === 'number' && !isNaN(rawRate)) 
+        ? (rawRate % 1 === 0 ? rawRate.toFixed(0) : rawRate.toFixed(1)) 
+        : "—";
+      
+      li.innerHTML = `
+        <img src="${posterUrl}" alt="${title}" class="dropdown-item-poster" />
+        <div class="dropdown-item-info">
+          <div class="dropdown-item-title">${title}</div>
+          <div class="dropdown-item-meta">
+            <span class="dropdown-item-type ${item.media_type}">${type}</span>
+            ${year ? `<span>${year}</span>` : ''}
+            <span class="dropdown-item-rate">⭐ ${rate}</span>
+          </div>
+        </div>
+      `;
+
+      li.addEventListener('click', async () => {
+        homePage.style.display = 'none';
+        searchPage.style.display = 'flex';
+        moviesByCategory.style.display = 'none';
+
+        const detailsContainer = searchPage.querySelector(".cards-details-container");
+
+        if (detailsContainer) {
+          detailsContainer.innerHTML = '<loading-spinner style="display: block; margin: 40px auto;"></loading-spinner>';
+        }
         
-        renderICardsDetails(container, data)
-        searchPage.style.display = "flex"
-        console.log(data)
-      })
-    })
+        const data = await getSearchId(item.id, item.media_type);
+        
+        if (detailsContainer) {
+          renderICardsDetails(detailsContainer, data);
+        }
+
+        searchDropdown.innerHTML = '';
+        searchDropdown.style.display = 'none';
+        search.value = '';
+      });
+
+      searchDropdown.appendChild(li);
+    });
+
+    searchDropdown.style.display = 'block';
+  };
+
+  search.addEventListener("input", debounce(handleSearchInput, 300));
+
+  document.addEventListener('click', (e) => {
+    if (search && searchDropdown) {
+      if (!search.contains(e.target) && !searchDropdown.contains(e.target)) {
+        searchDropdown.style.display = 'none';
+      }
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && searchDropdown) {
+      searchDropdown.style.display = 'none';
+      searchDropdown.innerHTML = '';
+    }
   });
 
   LoadPopular.movies();
-
-})
+});
 
 customElements.whenDefined("home-page").then(() => {
   renderCategories();

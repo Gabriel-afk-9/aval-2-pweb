@@ -6,20 +6,21 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="icon" type="image/png" href="assets/logo.png">
     <script type="module" src="js/script.js"></script>
-    <title>CineFlix</title>
+    <title>RicoFlix</title>
 </head>
 <body>
     <header class="header">
-        <div class="title-container">
+        <div class="title-container" id="home-button">
             <div class="icon-container">
                 <img src="./assets/lucide-Clapperboard-Outlined.svg" alt="icon" class="icon">
             </div>
-            <h1 class="title">CineFlix</h1>
+            <h1 class="title">RicoFlix</h1>
         </div>
 
         <div class="buttons-container">
             <div class="search-wrapper">
-                <input type="text" class="search" placeholder="Pesquisar..." id="search" >
+                <input type="text" id="search" class="search" placeholder="Buscar filmes e séries..." autocomplete="off" />
+                <ul id="searchDropdown" class="search-dropdown"></ul>
             </div>
 
             <button class="search-button" type="button">
