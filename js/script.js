@@ -33,6 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const search = document.getElementById("search");
   const searchDropdown = document.getElementById("searchDropdown");
+  const searchInput = document.querySelector("#search");
+  const searchButton = document.querySelector(".search-button");
+  const header = document.querySelector(".header");
   const homePage = document.querySelector("home-page");
   const searchPage = document.querySelector("search-page");
   const moviesByCategory = document.querySelector("movies-by-category-page");
@@ -43,6 +46,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const releasesPage = document.querySelector("releases-page");
   const popularsPage = document.querySelector("populars-page");
   const bestsPage = document.querySelector("bests-page");
+
+  searchButton.addEventListener("click", () => {
+  header.classList.toggle("search-active-mobile");
+
+  if (header.classList.contains("search-active-mobile")) {
+    searchInput.focus();
+  } else {
+    searchInput.value = "";
+  }
+});
 
   moviesPage.style.display = "none";
   tvSeriesPage.style.display = "none";
@@ -178,6 +191,8 @@ document.addEventListener("DOMContentLoaded", () => {
         searchDropdown.innerHTML = "";
         searchDropdown.style.display = "none";
         search.value = "";
+
+        header.classList.remove("search-active-mobile");
       });
 
       searchDropdown.appendChild(li);
@@ -189,12 +204,22 @@ document.addEventListener("DOMContentLoaded", () => {
   search.addEventListener("input", debounce(handleSearchInput, 300));
 
   document.addEventListener("click", (e) => {
-    if (search && searchDropdown) {
-      if (!search.contains(e.target) && !searchDropdown.contains(e.target)) {
-        searchDropdown.style.display = "none";
-      }
+  if (search && searchDropdown) {
+    if (!search.contains(e.target) && !searchDropdown.contains(e.target)) {
+      searchDropdown.style.display = "none";
     }
-  });
+  }
+
+  const isSearchActive = header.classList.contains("search-active-mobile");
+  
+  if (isSearchActive &&
+      !e.target.closest(".search-button") && 
+      !e.target.closest(".search-wrapper")
+  ) {
+    header.classList.remove("search-active-mobile");
+    if (searchInput) searchInput.value = "";
+  }
+});
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && searchDropdown) {

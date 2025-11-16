@@ -16,7 +16,7 @@ class Card extends HTMLElement {
         <div class="card-body">
           <h3 class="card-title">${title}</h3>
           <p class="card-release">Lançamento: ${release}</p>
-          <p class="card-rate">Avaliação: ${rate}</p>
+          <p class="card-rate">Avaliação: ${rate} ⭐</p>
           <div class="card-media">
             <p class="media-type">${media_type}</p>
           </div>
