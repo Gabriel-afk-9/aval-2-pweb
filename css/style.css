@@ -390,7 +390,7 @@ card-component:hover {
   font-size: 2rem;
   font-weight: bold;
   color: white;
-  margin: 0.5rem 0 1rem 2rem;
+  margin: 3rem 0 1rem 2rem;
 }
 
 .movies-title,
@@ -534,7 +534,7 @@ card-component:hover {
   gap: 1rem;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 1rem;
+  padding: 2rem;
   height: calc(2 * 8rem + 1rem);
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
@@ -549,7 +549,7 @@ card-component:hover {
   overflow-y: hidden;
   padding: 1rem;
   scroll-behavior: smooth;
-  margin: 0 2rem;
+  margin: 0.5rem 2rem 3rem;
   scroll-snap-type: x mandatory;
 }
 
@@ -561,7 +561,7 @@ card-component:hover {
   height: 0.6rem;
 }
 .categories-container::-webkit-scrollbar-thumb, .cards-container-home::-webkit-scrollbar-thumb {
-  background: #427ffa;
+  background: #8d8d8d;
   border-radius: 10rem;
 }
 
