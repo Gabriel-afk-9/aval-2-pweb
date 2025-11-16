@@ -12,6 +12,7 @@ import "../pages/series.js";
 import "../pages/releases.js";
 import "../pages/populars.js";
 import "../pages/bests.js";
+import "../components/footer.js";
 import { LoadPopular } from "./loadPopular.js";
 import { renderCategories } from "./renderCategories.js";
 import { LoadContent } from "./loadContent.js";
@@ -217,55 +218,32 @@ document.addEventListener("DOMContentLoaded", () => {
     sideBar.toggle();
   });
 
-  const moviesButton = document.querySelector("#go-to-movies");
-  moviesButton.addEventListener("click", () => {
-    goToHome();
-    homePage.style.display = "none";
-    moviesPage.style.display = "flex";
-    moviesPage.actualPage = 1;
-    LoadContent.loadMovies(1);
-    sideBar.toggle();
-  });
+  function setupNavigation(buttonSelector, pageElement, loadFunction, areSidebar) {
+    const button = document.querySelector(buttonSelector);
 
-  const tvSeriesButton = document.querySelector("#go-to-tv");
-  tvSeriesButton.addEventListener("click", () => {
-    goToHome();
-    homePage.style.display = "none";
-    tvSeriesPage.style.display = "flex";
-    tvSeriesPage.actualPage = 1;
-    LoadContent.loadTvSeries(1);
-    sideBar.toggle();
-  });
+    button.addEventListener("click", () => {
+      goToHome();
+      homePage.style.display = "none";
 
-  const releasesButton = document.querySelector("#go-to-releases");
-  releasesButton.addEventListener("click", () => {
-    goToHome();
-    homePage.style.display = "none";
-    releasesPage.style.display = "flex";
-    releasesPage.actualPage = 1;
-    LoadContent.loadReleases(1);
-    sideBar.toggle();
-  });
+      pageElement.style.display = "flex";
+      pageElement.actualPage = 1;
 
-  const popularsButton = document.querySelector("#go-to-populars");
-  popularsButton.addEventListener("click", () => {
-    goToHome();
-    homePage.style.display = "none";
-    popularsPage.style.display = "flex";
-    popularsPage.actualPage = 1;
-    LoadContent.loadPopulars(1);
-    sideBar.toggle();
-  });
+      loadFunction(1);
 
-  const bestsButton = document.querySelector("#go-to-bests");
-  bestsButton.addEventListener("click", () => {
-    goToHome();
-    homePage.style.display = "none";
-    bestsPage.style.display = "flex";
-    bestsPage.actualPage = 1;
-    LoadContent.loadBestRating(1);
-    sideBar.toggle();
-  });
+      areSidebar ? sideBar.toggle() : "";
+    });
+  }
+
+  setupNavigation("#go-to-movies", moviesPage, LoadContent.loadMovies, true);
+  setupNavigation("#go-to-tv", tvSeriesPage, LoadContent.loadTvSeries, true);
+  setupNavigation("#go-to-releases", releasesPage, LoadContent.loadReleases, true);
+  setupNavigation("#go-to-populars", popularsPage, LoadContent.loadPopulars, true);
+  setupNavigation("#go-to-bests", bestsPage, LoadContent.loadBestRating, true);
+  setupNavigation("#go-movies-footer", moviesPage, LoadContent.loadMovies, false);
+  setupNavigation("#go-tv-footer", tvSeriesPage, LoadContent.loadTvSeries, false);
+  setupNavigation("#go-releases-footer", releasesPage, LoadContent.loadReleases, false);
+  setupNavigation("#go-populars-footer", popularsPage, LoadContent.loadPopulars, false);
+  setupNavigation("#go-bests-footer", bestsPage, LoadContent.loadBestRating, false);
 });
 
 customElements.whenDefined("home-page").then(() => {

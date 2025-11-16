@@ -627,6 +627,59 @@ genre-card {
   background: #4a505a;
 }
 
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, #121418, #1a1a1a);
+  box-sizing: border-box;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.footer-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: start;
+  width: 100%;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.footer-section a {
+  width: min-content;
+  white-space: nowrap;
+  border-bottom: 0.2rem solid rgba(50, 55, 67, 1);
+}
+
+.footer-authors {
+  color: white;
+  display: flex;
+  white-space: nowrap;
+  flex-wrap: wrap;
+  width: 100%;
+  overflow: hidden;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-author {
+  font-size: 0.5rem;
+}
+
+.footer-divisor {
+  background-color: white;
+  height: 1rem;
+  margin: 0.4rem;
+}
+
 @keyframes spin {
   from {
     --angle: 0deg;
@@ -761,9 +814,21 @@ genre-card {
     width: max-content;
   }
 
-  .side-bar button:hover {
+  .side-bar button:hover, .footer-section a:hover {
     cursor: pointer;
     border-bottom: 0.2rem solid rgba(50, 55, 67, 1);
+  }
+
+  .footer-section a {
+    border-bottom: 0;
+  }
+
+  .footer-author {
+    font-size: 1rem;
+  }
+
+  .footer-divisor {
+    margin: 1rem;
   }
 }
 
