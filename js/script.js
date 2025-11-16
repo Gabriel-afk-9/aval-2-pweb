@@ -16,6 +16,7 @@ import "../components/footer.js";
 import { LoadPopular } from "./loadPopular.js";
 import { renderCategories } from "./renderCategories.js";
 import { LoadContent } from "./loadContent.js";
+import { getContent } from "./getContent.js";
 
 let local = "home";
 
@@ -46,16 +47,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const releasesPage = document.querySelector("releases-page");
   const popularsPage = document.querySelector("populars-page");
   const bestsPage = document.querySelector("bests-page");
+  const cardsContainerHome = document.querySelector(".cards-container-home");
+
+  getContent(cardsContainerHome);
 
   searchButton.addEventListener("click", () => {
-  header.classList.toggle("search-active-mobile");
+    header.classList.toggle("search-active-mobile");
 
-  if (header.classList.contains("search-active-mobile")) {
-    searchInput.focus();
-  } else {
-    searchInput.value = "";
-  }
-});
+    if (header.classList.contains("search-active-mobile")) {
+      searchInput.focus();
+    } else {
+      searchInput.value = "";
+    }
+  });
 
   moviesPage.style.display = "none";
   tvSeriesPage.style.display = "none";
@@ -204,22 +208,23 @@ document.addEventListener("DOMContentLoaded", () => {
   search.addEventListener("input", debounce(handleSearchInput, 300));
 
   document.addEventListener("click", (e) => {
-  if (search && searchDropdown) {
-    if (!search.contains(e.target) && !searchDropdown.contains(e.target)) {
-      searchDropdown.style.display = "none";
+    if (search && searchDropdown) {
+      if (!search.contains(e.target) && !searchDropdown.contains(e.target)) {
+        searchDropdown.style.display = "none";
+      }
     }
-  }
 
-  const isSearchActive = header.classList.contains("search-active-mobile");
-  
-  if (isSearchActive &&
-      !e.target.closest(".search-button") && 
+    const isSearchActive = header.classList.contains("search-active-mobile");
+
+    if (
+      isSearchActive &&
+      !e.target.closest(".search-button") &&
       !e.target.closest(".search-wrapper")
-  ) {
-    header.classList.remove("search-active-mobile");
-    if (searchInput) searchInput.value = "";
-  }
-});
+    ) {
+      header.classList.remove("search-active-mobile");
+      if (searchInput) searchInput.value = "";
+    }
+  });
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && searchDropdown) {
@@ -243,7 +248,12 @@ document.addEventListener("DOMContentLoaded", () => {
     sideBar.toggle();
   });
 
-  function setupNavigation(buttonSelector, pageElement, loadFunction, areSidebar) {
+  function setupNavigation(
+    buttonSelector,
+    pageElement,
+    loadFunction,
+    areSidebar
+  ) {
     const button = document.querySelector(buttonSelector);
 
     button.addEventListener("click", () => {
@@ -261,14 +271,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setupNavigation("#go-to-movies", moviesPage, LoadContent.loadMovies, true);
   setupNavigation("#go-to-tv", tvSeriesPage, LoadContent.loadTvSeries, true);
-  setupNavigation("#go-to-releases", releasesPage, LoadContent.loadReleases, true);
-  setupNavigation("#go-to-populars", popularsPage, LoadContent.loadPopulars, true);
+  setupNavigation(
+    "#go-to-releases",
+    releasesPage,
+    LoadContent.loadReleases,
+    true
+  );
+  setupNavigation(
+    "#go-to-populars",
+    popularsPage,
+    LoadContent.loadPopulars,
+    true
+  );
   setupNavigation("#go-to-bests", bestsPage, LoadContent.loadBestRating, true);
-  setupNavigation("#go-movies-footer", moviesPage, LoadContent.loadMovies, false);
-  setupNavigation("#go-tv-footer", tvSeriesPage, LoadContent.loadTvSeries, false);
-  setupNavigation("#go-releases-footer", releasesPage, LoadContent.loadReleases, false);
-  setupNavigation("#go-populars-footer", popularsPage, LoadContent.loadPopulars, false);
-  setupNavigation("#go-bests-footer", bestsPage, LoadContent.loadBestRating, false);
+  setupNavigation(
+    "#go-movies-footer",
+    moviesPage,
+    LoadContent.loadMovies,
+    false
+  );
+  setupNavigation(
+    "#go-tv-footer",
+    tvSeriesPage,
+    LoadContent.loadTvSeries,
+    false
+  );
+  setupNavigation(
+    "#go-releases-footer",
+    releasesPage,
+    LoadContent.loadReleases,
+    false
+  );
+  setupNavigation(
+    "#go-populars-footer",
+    popularsPage,
+    LoadContent.loadPopulars,
+    false
+  );
+  setupNavigation(
+    "#go-bests-footer",
+    bestsPage,
+    LoadContent.loadBestRating,
+    false
+  );
 });
 
 customElements.whenDefined("home-page").then(() => {

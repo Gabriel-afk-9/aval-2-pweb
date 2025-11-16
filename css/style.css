@@ -47,8 +47,10 @@ body {
 
 card-component {
   display: block;
-  width: 200px;
+  width: 10rem;
+  min-width: 10rem;
   height: auto;
+  flex-shrink: 0;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -375,6 +377,7 @@ card-component:hover {
 
 .popular-title,
 .more-title,
+.extras-title,
 .movies-title,
 .bests-title,
 .populars-title,
@@ -416,7 +419,8 @@ card-component:hover {
 }
 
 .popular-title::after,
-.categories-title::after {
+.categories-title::after,
+  .extras-title::after {
   content: "";
   position: absolute;
   left: 0;
@@ -440,6 +444,10 @@ card-component:hover {
 
 .categories-title::after {
   width: 35%;
+}
+
+.extras-title::after {
+  width: 17%;
 }
 
 .more-title::after {
@@ -533,10 +541,26 @@ card-component:hover {
   margin: 0 2rem;
 }
 
-.categories-container::-webkit-scrollbar {
+.cards-container-home {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem;
+  scroll-behavior: smooth;
+  margin: 0 2rem;
+  scroll-snap-type: x mandatory;
+}
+
+.cards-container-home > * {
+  scroll-snap-align: start;
+}
+
+.categories-container::-webkit-scrollbar, .cards-container-home::-webkit-scrollbar {
   height: 0.6rem;
 }
-.categories-container::-webkit-scrollbar-thumb {
+.categories-container::-webkit-scrollbar-thumb, .cards-container-home::-webkit-scrollbar-thumb {
   background: #427ffa;
   border-radius: 10rem;
 }
