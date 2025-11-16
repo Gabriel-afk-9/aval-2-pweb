@@ -3,7 +3,7 @@ import "../pages/home.js";
 
 export const LoadPopular = {
   async movies() {
-    const res = await fetch("https://api.themoviedb.org/3/movie/popular", {
+    const res = await fetch(`${Config.API_HOST}/movie/popular`, {
       headers: {
         Authorization: `Bearer ${Config.TOKEN}`
       }

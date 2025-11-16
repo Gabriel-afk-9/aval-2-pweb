@@ -1,22 +1,7 @@
 import { LoadContent } from "../js/loadContent.js";
 
-class MoviesByCategory extends HTMLElement {
+class Bests extends HTMLElement {
   actualPage = 1;
-  genreName = null;
-
-  static get observedAttributes() {
-    return ["genre-name"];
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "genre-name") {
-      this.genreName = newValue;
-
-      this.actualPage = 1;
-      LoadContent.loadMoviesByCategory(this.genreName, this.actualPage);
-      this.updatePageNumber();
-    }
-  }
 
   connectedCallback() {
     this.render();
@@ -25,10 +10,10 @@ class MoviesByCategory extends HTMLElement {
 
   render() {
     this.innerHTML = `
-      <div class="movies-by-category">
-        <h2 class="category-title"></h2>
+      <div class="bests-page">
+        <h2 class="bests-title">Os Mais Bem Avaliados</h2>
 
-        <div class="movies-container"></div>
+        <div class="bests-page-container"></div>
 
         <div class="page-informations-container">
           <button class="back-page-button">Anterior</button>
@@ -41,37 +26,38 @@ class MoviesByCategory extends HTMLElement {
 
   addEvents() {
     const nextButton = this.querySelector(".next-page-button");
-    const backButton = this.querySelector(".back-page-button");
 
     nextButton.addEventListener("click", () => {
       this.actualPage++;
-      LoadContent.loadMoviesByCategory(this.genreName, this.actualPage);
+      LoadContent.loadBestRating(this.actualPage);
       this.updatePageNumber();
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       });
     });
+
+    const backButton = this.querySelector(".back-page-button");
+
+    this.actualPage == 1 ? backButton.disabled = true : backButton.disabled = false;
 
     backButton.addEventListener("click", () => {
       this.actualPage--;
-      LoadContent.loadMoviesByCategory(this.genreName, this.actualPage);
+      LoadContent.loadBestRating(this.actualPage);
       this.updatePageNumber();
-
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       });
-    });
+    })
   }
 
   updatePageNumber() {
-    const pageText = this.querySelector(".actual-page");
     const backButton = this.querySelector(".back-page-button");
-
+    const pageText = this.querySelector(".actual-page");
     pageText.textContent = this.actualPage;
     backButton.disabled = (this.actualPage === 1);
   }
 }
 
-customElements.define("movies-by-category-page", MoviesByCategory);
+customElements.define("bests-page", Bests);

@@ -11,7 +11,6 @@ export function renderICardsDetails(container, data) {
       ? `https://image.tmdb.org/t/p/w500${data.poster_path}`
       : "../assets/image-not-found.png";
     const genresObj = data.genres || [];
-    console.log(genresObj)
     const genrersName = genresObj.map(element => element = element.name);
     const seasonsObj = data.seasons || [];
     const seasonsName = seasonsObj.map(element => element = element.name)

@@ -1,4 +1,3 @@
-import { renderCards } from "./renderCards.js";
 import { getSearch } from "./search.js";
 import { getSearchId } from "./searchById.js";
 import { renderICardsDetails } from "./renderICardsDetails.js";
@@ -10,6 +9,9 @@ import "../components/loadingSpinner.js";
 import "../components/sideBar.js";
 import "../pages/movies.js";
 import "../pages/series.js";
+import "../pages/releases.js";
+import "../pages/populars.js";
+import "../pages/bests.js";
 import { LoadPopular } from "./loadPopular.js";
 import { renderCategories } from "./renderCategories.js";
 import { LoadContent } from "./loadContent.js";
@@ -32,14 +34,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchDropdown = document.getElementById("searchDropdown");
   const homePage = document.querySelector("home-page");
   const searchPage = document.querySelector("search-page");
-  const moviesByCategory = document.querySelector("movies-by-category");
+  const moviesByCategory = document.querySelector("movies-by-category-page");
   const homeButton = document.getElementById("home-button");
   const globalBackButton = document.getElementById("global-back-button");
   const moviesPage = document.querySelector("movies-page");
   const tvSeriesPage = document.querySelector("tv-series-page");
+  const releasesPage = document.querySelector("releases-page");
+  const popularsPage = document.querySelector("populars-page");
+  const bestsPage = document.querySelector("bests-page");
 
   moviesPage.style.display = "none";
   tvSeriesPage.style.display = "none";
+  releasesPage.style.display = "none";
+  popularsPage.style.display = "none";
+  bestsPage.style.display = "none";
 
   searchPage.style.display = "none";
   moviesByCategory.style.display = "none";
@@ -50,6 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
     moviesByCategory.style.display = "none";
     globalBackButton.style.display = "none";
     moviesPage.style.display = "none";
+    releasesPage.style.display = "none";
+    popularsPage.style.display = "none";
+    bestsPage.style.display = "none";
 
     if (search) search.value = "";
     if (searchDropdown) {
@@ -207,8 +218,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const moviesButton = document.querySelector("#go-to-movies");
   moviesButton.addEventListener("click", () => {
+    goToHome();
     homePage.style.display = "none";
-    tvSeriesPage.style.display = "none";
     moviesPage.style.display = "flex";
     LoadContent.loadMovies(1);
     sideBar.toggle();
@@ -216,10 +227,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const tvSeriesButton = document.querySelector("#go-to-tv");
   tvSeriesButton.addEventListener("click", () => {
+    goToHome();
     homePage.style.display = "none";
-    moviesPage.style.display = "none";
     tvSeriesPage.style.display = "flex";
     LoadContent.loadTvSeries(1);
+    sideBar.toggle();
+  });
+
+  const releasesButton = document.querySelector("#go-to-releases");
+  releasesButton.addEventListener("click", () => {
+    goToHome();
+    homePage.style.display = "none";
+    releasesPage.style.display = "flex";
+    LoadContent.loadReleases(1);
+    sideBar.toggle();
+  });
+
+  const popularsButton = document.querySelector("#go-to-populars");
+  popularsButton.addEventListener("click", () => {
+    goToHome();
+    homePage.style.display = "none";
+    popularsPage.style.display = "flex";
+    LoadContent.loadPopulars(1);
+    sideBar.toggle();
+  });
+
+  const bestsButton = document.querySelector("#go-to-bests");
+  bestsButton.addEventListener("click", () => {
+    goToHome();
+    homePage.style.display = "none";
+    bestsPage.style.display = "flex";
+    LoadContent.loadBestRating(1);
     sideBar.toggle();
   });
 });

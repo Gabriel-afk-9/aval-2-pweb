@@ -31,6 +31,10 @@ class Movies extends HTMLElement {
       this.actualPage++;
       LoadContent.loadMovies(this.actualPage);
       this.updatePageNumber();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     });
 
     const backButton = this.querySelector(".back-page-button");
@@ -41,6 +45,10 @@ class Movies extends HTMLElement {
       this.actualPage--;
       LoadContent.loadMovies(this.actualPage);
       this.updatePageNumber();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     })
   }
 

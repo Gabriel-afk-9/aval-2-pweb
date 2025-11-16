@@ -1,6 +1,6 @@
 import { Genres } from "./genres.js";
 import { GenreImages } from "./genreImages.js";
-import { loadMoviesByCategory } from "./loadMoviesByCategory.js";
+import { LoadContent } from "./loadContent.js";
 
 export function renderCategories() {
   const container = document.querySelector(".categories-container");
@@ -23,8 +23,17 @@ export function renderCategories() {
       const element = e.currentTarget;
 
       const genreFromAttr = element.getAttribute("genre-name");
-      loadMoviesByCategory(genreFromAttr);
-    })
+
+      const homePage = document.querySelector("home-page");
+      const categoryPage = document.querySelector("movies-by-category-page");
+
+      categoryPage.setAttribute("genre-name", genreFromAttr);
+
+      LoadContent.loadMoviesByCategory(genreFromAttr, 1);
+
+      homePage.style.display = "none";
+      categoryPage.style.display = "flex";
+    });
 
     container.appendChild(item);
   })

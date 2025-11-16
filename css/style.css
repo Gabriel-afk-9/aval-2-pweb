@@ -31,6 +31,9 @@ body {
 .movies-container,
 .movies-page-container,
 .tv-series-page-container,
+.releases-page-container,
+.populars-page-container,
+.bests-page-container,
 .cards-details-container {
   display: flex;
   flex-wrap: wrap;
@@ -218,6 +221,9 @@ card-component:hover {
 .home-page,
 .movies-page,
 .tv-series-page,
+.releases-page,
+.populars-page,
+.bests-page,
 .categories-page,
 .search-page {
   color: white;
@@ -309,6 +315,10 @@ card-component:hover {
 .menu-button:hover:active {
   background: rgb(50, 50, 50);
   cursor: pointer;
+}
+
+.actual-page {
+  color: white;
 }
 
 .search-button:disabled,
