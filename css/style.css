@@ -87,7 +87,7 @@ card-component:hover {
 }
 
 .card-detail-body p {
-  margin-top: 5rem;
+  margin-top: 2rem;
 }
 
 .card-detail-main-info{
@@ -124,10 +124,28 @@ card-component:hover {
   padding: 5px;
   cursor: pointer;
   text-align: center;
-  background-color: #0468f5;
   border-radius: 6px;
   text-transform: uppercase ;
 }
+
+.episodes-list-expanded {
+    grid-column: 1 / -1; 
+    background-color: #1a1a1a;
+    padding: 20px;
+    margin-top: 5px;
+}
+
+.class-detail-seasons > div{
+    background-color: #007bff;
+    padding: 10px;
+    width: 15em;
+}
+
+.class-detail-seasons > p {
+  display: block;
+  margin-top: 4px;
+}
+
 
 .class-detail-seasons div:hover{
   background-color: #438cf1;
