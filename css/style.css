@@ -29,6 +29,7 @@ body {
 
 .cards-container,
 .movies-container,
+.movies-page-container,
 .cards-details-container {
   display: flex;
   flex-wrap: wrap;
@@ -298,6 +299,7 @@ card-component:hover {
 
 .popular-title,
 .more-title,
+.movies-title,
 .category-title,
 .categories-title {
   position: relative;
@@ -306,6 +308,11 @@ card-component:hover {
   font-weight: bold;
   color: white;
   margin: 0.5rem 0 1rem 2rem;
+}
+
+.movies-title {
+  margin: .2rem auto;
+  text-align: center;
 }
 
 .category-title {
@@ -564,6 +571,27 @@ genre-card {
   font-size: 1.2rem;
   text-align: left;
   white-space: nowrap;
+}
+
+.page-informations-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.back-page-button, .next-page-button {
+  border: 0.1rem solid rgba(66, 127, 250, 0.2);
+  border-radius: 0.5rem;
+  background: linear-gradient(45deg, #121418, #1e2127);
+  padding: 0.2rem 0.5rem;
+  font-size: 1rem;
+  color: white;
+}
+
+.back-page-button:hover, .next-page-button:hover {
+  cursor: pointer;
+  background: #4a505a;
 }
 
 @keyframes spin {

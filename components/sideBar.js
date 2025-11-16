@@ -4,12 +4,11 @@ class SideBar extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <div class="side-bar">
-        <button>Filmes</button>
-        <button>Séries</button>
-        <button>Categorias</button>
-        <button>Lançamentos</button>
-        <button>Mais Populares</button>
-        <button>Top Avaliados</button>
+        <button id="go-to-movies">Filmes</button>
+        <button id="go-to-tv">Séries</button>
+        <button id="go-to-news">Lançamentos</button>
+        <button id="go-to-bests">Mais Populares</button>
+        <button id="go-to-ratings">Top Avaliados</button>
       </div>
     `;
 
