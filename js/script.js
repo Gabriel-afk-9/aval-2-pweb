@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     releasesPage.style.display = "none";
     popularsPage.style.display = "none";
     bestsPage.style.display = "none";
+    tvSeriesPage.style.display = "none";
 
     if (search) search.value = "";
     if (searchDropdown) {
@@ -221,6 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
     goToHome();
     homePage.style.display = "none";
     moviesPage.style.display = "flex";
+    moviesPage.actualPage = 1;
     LoadContent.loadMovies(1);
     sideBar.toggle();
   });
@@ -230,6 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
     goToHome();
     homePage.style.display = "none";
     tvSeriesPage.style.display = "flex";
+    tvSeriesPage.actualPage = 1;
     LoadContent.loadTvSeries(1);
     sideBar.toggle();
   });
@@ -239,6 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
     goToHome();
     homePage.style.display = "none";
     releasesPage.style.display = "flex";
+    releasesPage.actualPage = 1;
     LoadContent.loadReleases(1);
     sideBar.toggle();
   });
@@ -248,6 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
     goToHome();
     homePage.style.display = "none";
     popularsPage.style.display = "flex";
+    popularsPage.actualPage = 1;
     LoadContent.loadPopulars(1);
     sideBar.toggle();
   });
@@ -257,6 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
     goToHome();
     homePage.style.display = "none";
     bestsPage.style.display = "flex";
+    bestsPage.actualPage = 1;
     LoadContent.loadBestRating(1);
     sideBar.toggle();
   });
