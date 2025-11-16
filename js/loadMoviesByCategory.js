@@ -30,6 +30,7 @@ export async function loadMoviesByCategory(categoryName) {
 
   homePage.style.display = "none";
   moviesCategoryPage.style.display = "flex";
+  document.getElementById('global-back-button').style.display = 'inline-flex';
 
   window.scrollTo({
     top: 0,

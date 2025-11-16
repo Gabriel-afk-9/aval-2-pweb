@@ -24,13 +24,14 @@ function debounce(func, delay) {
 document.addEventListener("DOMContentLoaded", () => {
   const loadingSpinner = document.querySelector("loading-spinner");
   loadingSpinner.style.display = "none";
+
   const search = document.getElementById("search");
   const searchDropdown = document.getElementById("searchDropdown");
   const homePage = document.querySelector("home-page");
   const searchPage = document.querySelector("search-page");
   const moviesByCategory = document.querySelector("movies-by-category");
   const homeButton = document.getElementById("home-button");
-
+const globalBackButton = document.getElementById("global-back-button");
   searchPage.style.display = "none";
   moviesByCategory.style.display = "none";
 
@@ -38,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     homePage.style.display = "flex";
     searchPage.style.display = "none";
     moviesByCategory.style.display = "none";
+    globalBackButton.style.display = "none";
 
     if (search) search.value = '';
     if (searchDropdown) {
@@ -48,6 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
   
   if (homeButton) {
     homeButton.addEventListener('click', goToHome);
+  }
+
+  if (globalBackButton) {
+    globalBackButton.addEventListener('click', goToHome); // Clique no botão "Voltar"
   }
 
   if (searchPage) {
@@ -70,11 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const value = e.target.value.trim();
 
     if (value === "") {
-      searchDropdown.innerHTML = '';
-      searchDropdown.style.display = 'none';
-      homePage.style.display = "flex";
-      searchPage.style.display = "none";
-      moviesByCategory.style.display = "none";
+      goToHome();
       return;
     }
 
@@ -127,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
         homePage.style.display = 'none';
         searchPage.style.display = 'flex';
         moviesByCategory.style.display = 'none';
+        globalBackButton.style.display = 'inline-flex';
 
         const detailsContainer = searchPage.querySelector(".cards-details-container");
 

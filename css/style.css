@@ -837,11 +837,11 @@ genre-card {
   transform: scale(1.02);
 }
 
-.btn-back-details {
-  display: inline-flex;
+.btn-back-global {
+  display: none;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin: 1.5rem 2rem 0;  
   background-color: #323743;
   color: #f0f0f0;
   border: 1px solid #4a505a;
@@ -853,7 +853,7 @@ genre-card {
   transition: all 0.2s ease;
 }
 
-.btn-back-details:hover {
+.btn-back-global:hover {
   background-color: #427ffaff;
   border-color: #427ffaff;
   color: #fff;
@@ -861,6 +861,6 @@ genre-card {
   transform: translateY(-2px);
 }
 
-.btn-back-details svg {
+.btn-back-global svg {
   margin-top: -1px; 
 }
