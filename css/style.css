@@ -659,6 +659,15 @@ genre-card:hover {
   font-size: 1.2rem;
   text-align: left;
   white-space: nowrap;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.25s ease-out;
+}
+
+.side-bar button:hover {
+  cursor: pointer;
+  background-color: #427ffaff;
+  color: #fff;
 }
 
 .page-informations-container {
@@ -714,7 +723,12 @@ genre-card:hover {
 .footer-section a {
   width: min-content;
   white-space: nowrap;
-  border-bottom: 0.2rem solid rgba(50, 55, 67, 1);
+  color: white;
+  text-decoration: none;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  border-bottom: 0;
+  transition: all 0.25s ease-out;
 }
 
 .footer-authors {
@@ -899,8 +913,9 @@ genre-card:hover {
   .side-bar button:hover,
   .footer-section a:hover {
     cursor: pointer;
-    border-bottom: 0.2rem solid rgba(50, 55, 67, 1);
-  }
+    background-color: #427ffaff;
+  border-radius: 0.5rem; 
+    }
 
   .footer-section a {
     border-bottom: 0;
@@ -997,7 +1012,7 @@ genre-card:hover {
 
 .dropdown-item-meta {
   font-size: 0.8rem;
-  color: #b0b0b0;
+  color: #ffffff;
   display: flex;
   align-items: center;
   gap: 0.5rem;
