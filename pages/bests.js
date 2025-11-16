@@ -1,7 +1,16 @@
 import { LoadContent } from "../js/loadContent.js";
 
 class Bests extends HTMLElement {
-  actualPage = 1;
+  _actualPage = 1;
+
+  set actualPage(value) {
+    this._actualPage = value;
+    this.updatePageNumber();
+  }
+
+  get actualPage() {
+    return this._actualPage;
+  }
 
   connectedCallback() {
     this.render();
@@ -30,7 +39,6 @@ class Bests extends HTMLElement {
     nextButton.addEventListener("click", () => {
       this.actualPage++;
       LoadContent.loadBestRating(this.actualPage);
-      this.updatePageNumber();
       window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -39,17 +47,16 @@ class Bests extends HTMLElement {
 
     const backButton = this.querySelector(".back-page-button");
 
-    this.actualPage == 1 ? backButton.disabled = true : backButton.disabled = false;
+    backButton.disabled = (this.actualPage === 1);
 
     backButton.addEventListener("click", () => {
       this.actualPage--;
       LoadContent.loadBestRating(this.actualPage);
-      this.updatePageNumber();
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       });
-    })
+    });
   }
 
   updatePageNumber() {

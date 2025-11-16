@@ -380,6 +380,9 @@ align-items: center;
 .popular-title,
 .more-title,
 .movies-title,
+.bests-title,
+.populars-title,
+.releases-title,
 .tv-series-title,
 .category-title,
 .categories-title {
@@ -391,9 +394,8 @@ align-items: center;
   margin: 0.5rem 0 1rem 2rem;
 }
 
-.movies-title,
-.tv-series-title {
-  margin: 0.2rem auto;
+.movies-title, .tv-series-title {
+  margin: .2rem auto;
   text-align: center;
 }
 
