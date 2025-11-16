@@ -395,7 +395,7 @@ genre-card {
   position: absolute;
   margin: 0;
   font-weight: bold;
-  font-size: clamp(1rem, 5vw, 3rem);
+  font-size: clamp(1rem, 3vw, 3rem);
   top: 50%;
   left: 50%;
   translate: -50% -50%;

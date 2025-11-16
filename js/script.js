@@ -170,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   LoadPopular.movies();
 
+  const sideBar = document.querySelector("side-bar");
   const menuButton = document.getElementById("menu-button");
   let isOpen = false;
 
