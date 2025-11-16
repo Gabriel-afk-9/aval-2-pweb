@@ -1,8 +1,17 @@
 import { LoadContent } from "../js/loadContent.js";
 
 class MoviesByCategory extends HTMLElement {
-  actualPage = 1;
+  _actualPage = 1;
   genreName = null;
+
+  set actualPage(value) {
+    this._actualPage = value;
+    this.updatePageNumber();
+  }
+
+  get actualPage() {
+    return this._actualPage;
+  }
 
   static get observedAttributes() {
     return ["genre-name"];
@@ -46,7 +55,6 @@ class MoviesByCategory extends HTMLElement {
     nextButton.addEventListener("click", () => {
       this.actualPage++;
       LoadContent.loadMoviesByCategory(this.genreName, this.actualPage);
-      this.updatePageNumber();
       window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -56,7 +64,6 @@ class MoviesByCategory extends HTMLElement {
     backButton.addEventListener("click", () => {
       this.actualPage--;
       LoadContent.loadMoviesByCategory(this.genreName, this.actualPage);
-      this.updatePageNumber();
 
       window.scrollTo({
         top: 0,
