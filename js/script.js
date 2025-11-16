@@ -265,6 +265,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       loadFunction(1);
 
+      globalBackButton.style.display = "inline-flex";
+
       areSidebar ? sideBar.toggle() : "";
     });
   }
