@@ -68,7 +68,6 @@ card-component:hover {
 
 .cards-details-component {
   box-sizing: border-box;
-  display: block;
   width: auto;
   border-radius: 10px;
   height: auto;
@@ -79,23 +78,35 @@ card-component:hover {
   color: white;
 }
 
+.card-detail  {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .card-detail h3 {
   font-size: 2rem;
   text-shadow: 6px 6px 20px rgb(66, 127, 250, 0.8);
 }
 .card-detail-body {
+  flex-wrap: wrap;
   box-sizing: border-box;
   padding: 20px;
   display: flex;
-  font-size: 1.2rem;
+  justify-content: center;
+  font-size: 1rem;
   border: rgb(66, 127, 250) solid 4px;
   box-shadow: 6px 6px 12px 10px rgb(66, 127, 250, 0.2);
   border-radius: 9px;
   background-color: #121418;
 }
 
+.card-detail-body img{
+  width: 14.5em;
+}
+
 .card-detail-body p {
-  margin-top: 2rem;
+  margin-top: 0.8rem;
 }
 
 .card-detail-main-info {
@@ -121,7 +132,7 @@ card-component:hover {
 
 .class-detail-seasons {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(1, minmax(250px, 1fr));
   margin-top: 2rem;
   gap: 15px;
   font-weight: 900;
@@ -129,7 +140,7 @@ card-component:hover {
 }
 
 .class-detail-seasons div {
-  padding: 5px;
+  padding: 3px;
   cursor: pointer;
   text-align: center;
   border-radius: 6px;
@@ -960,6 +971,36 @@ genre-card:hover {
   .side-bar button {
     font-size: 1.5rem;
     width: max-content;
+  }
+
+  .card-detail-body {
+    flex-wrap: nowrap;
+    font-size: 1.2rem;
+  }
+
+  .card-detail-body p{
+    margin-top: 2rem;
+  }
+
+  .card-detail-body img{
+    width: 21.1em;
+    height: auto;
+  }
+
+  .card-detail  {
+    display: block;
+    flex-direction: column;
+    align-items: center;
+  }
+  .class-detail-seasons{
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  .class-detail-seasons div {
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 6px;
+    text-transform: uppercase;
   }
 
   .side-bar button:hover,

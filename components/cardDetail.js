@@ -17,10 +17,10 @@ class CardDetails extends HTMLElement {
         <div class="card-detail-body">
             <img src="${poster}" alt="${title}" class="card-detail-img"/>
             <div class="card-detail-main-info">
-            <p class="card-detail-release"><strong>Lançamento: </strong>${release}</p>
-            <p class="card-detail-overview"><strong>Sinopse: </strong>${overview}</p>
-            <div id="genrers" class="card-details-genres"></div>          
-            <p class="card-detail-rate" class="class-detail-avaliation"><strong>Avaliação⭐: </strong>${rate}</p>
+              <p class="card-detail-release"><strong>Lançamento: </strong>${release}</p>
+              <p class="card-detail-overview"><strong>Sinopse: </strong>${overview}</p>
+              <div id="genrers" class="card-details-genres"></div>          
+              <p class="card-detail-rate" class="class-detail-avaliation"><strong>Avaliação⭐: </strong>${rate}</p>
             </div>
 
         </div>
@@ -52,7 +52,7 @@ class CardDetails extends HTMLElement {
         season.setAttribute('state', '0')
         season.setAttribute('data-index', add);
 
-        seasonsName.textContent = `Temporada ${add + 1}  🠲`
+        seasonsName.textContent = `Temporada ${add + 1}  ⇨`
         season.appendChild(seasonsName)
         seasonsParagra.appendChild(season)
 
