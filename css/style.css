@@ -13,6 +13,7 @@ body {
   background-size: 400% 400%;
   animation: fluidMove 5s ease-in-out infinite;
   font-family: "Nunito Sans", sans-serif;
+  padding-top: 5rem;
 }
 
 @keyframes fluidMove {
@@ -54,10 +55,12 @@ card-component {
   transition: transform 0.3s ease-in-out;
   background-color: #1e2127;
   color: white;
+  transition: all 0.25s ease-out;
+  cursor: pointer;
 }
 
 card-component:hover {
-  transform: translateY(-5px);
+  transform: scale(1.05);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
@@ -74,11 +77,11 @@ card-component:hover {
   color: white;
 }
 
-.card-detail h3{
+.card-detail h3 {
   font-size: 2rem;
-  text-shadow:  6px 6px 20px rgb(66, 127, 250, 0.8);;
+  text-shadow: 6px 6px 20px rgb(66, 127, 250, 0.8);
 }
-.card-detail-body{
+.card-detail-body {
   box-sizing: border-box;
   padding: 20px;
   display: flex;
@@ -93,11 +96,11 @@ card-component:hover {
   margin-top: 2rem;
 }
 
-.card-detail-main-info{
+.card-detail-main-info {
   padding: 25px;
 }
 
-.card-details-genres{
+.card-details-genres {
   width: 10em;
   text-align: center;
 }
@@ -110,11 +113,11 @@ card-component:hover {
   font-weight: 800;
 }
 
-.card-details-genres div p{
+.card-details-genres div p {
   padding: 9px;
 }
 
-.class-detail-seasons{
+.class-detail-seasons {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   margin-top: 2rem;
@@ -123,25 +126,25 @@ card-component:hover {
   text-shadow: 6px 6px 20px rgba(182, 203, 243, 0.8);
 }
 
-.class-detail-seasons div{
+.class-detail-seasons div {
   padding: 5px;
   cursor: pointer;
   text-align: center;
   border-radius: 6px;
-  text-transform: uppercase ;
+  text-transform: uppercase;
 }
 
 .episodes-list-expanded {
-    grid-column: 1 / -1; 
-    background-color: #1a1a1a;
-    padding: 20px;
-    margin-top: 5px;
+  grid-column: 1 / -1;
+  background-color: #1a1a1a;
+  padding: 20px;
+  margin-top: 5px;
 }
 
-.class-detail-seasons > div{
-    background-color: #007bff;
-    padding: 10px;
-    width: 15em;
+.class-detail-seasons > div {
+  background-color: #007bff;
+  padding: 10px;
+  width: 15em;
 }
 
 .class-detail-seasons > p {
@@ -149,8 +152,7 @@ card-component:hover {
   margin-top: 4px;
 }
 
-
-.class-detail-seasons div:hover{
+.class-detail-seasons div:hover {
   background-color: #438cf1;
 }
 
@@ -186,7 +188,6 @@ card-component:hover {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 2.2em;
 }
 
 .card-release,
@@ -241,6 +242,10 @@ card-component:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
 .title-container {
@@ -279,11 +284,30 @@ card-component:hover {
 .buttons-container {
   margin-right: 1rem;
   display: flex;
+  justify-content: flex-end;
+align-items: center;
   gap: 0.5rem;
+}
+
+.search-wrapper {
+  position: relative;
+  display: inline-block;
+  border-radius: 0.6rem;
+  transition: width 0.3s ease-out; /* Anima a largura */
 }
 
 .search {
   display: none;
+  box-sizing: border-box; /* Garante que padding não quebre o layout */
+  height: 2.5rem; /* Mesma altura do .search-button */
+  width: 100%; /* Vai preencher o wrapper */
+  border-radius: 0.5rem;
+  border: 0.1rem solid rgba(50, 55, 67, 1);
+  background-color: rgba(23, 26, 31, 1);
+  outline: none;
+  font-size: 1rem;
+  color: #b0b0b0;
+  padding: 0.1rem 0.75rem;
 }
 
 .search-button,
@@ -305,7 +329,8 @@ card-component:hover {
   height: 20px;
 }
 
-.menu-button.toggled, .menu-button.toggled:hover {
+.menu-button.toggled,
+.menu-button.toggled:hover {
   background-color: rgba(50, 55, 67, 1);
 }
 
@@ -326,6 +351,32 @@ card-component:hover {
   opacity: 0.4;
 }
 
+/* 1. Esconde tudo, exceto o wrapper da busca */
+.header.search-active-mobile .title-container,
+.header.search-active-mobile .menu-button,
+.header.search-active-mobile .search-button {
+  display: none;
+}
+
+/* 2. O container se expande e centraliza */
+.header.search-active-mobile .buttons-container {
+  width: 100%;
+  justify-content: center; /* Centraliza o wrapper */
+  margin-right: 0;
+  padding: 0 1rem; /* Adiciona respiro nas laterais */
+  box-sizing: border-box; /* Garante que o padding não quebre o layout */
+}
+
+/* 3. O wrapper da busca ocupa o espaço disponível */
+.header.search-active-mobile .search-wrapper {
+  width: 100%;
+}
+
+/* 4. O input de busca finalmente aparece */
+.header.search-active-mobile .search {
+  display: block;
+}
+
 .popular-title,
 .more-title,
 .movies-title,
@@ -340,8 +391,9 @@ card-component:hover {
   margin: 0.5rem 0 1rem 2rem;
 }
 
-.movies-title, .tv-series-title {
-  margin: .2rem auto;
+.movies-title,
+.tv-series-title {
+  margin: 0.2rem auto;
   text-align: center;
 }
 
@@ -501,6 +553,11 @@ genre-card {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+genre-card:hover {
+  transform: scale(1.05);
 }
 
 .genre-name {
@@ -516,6 +573,7 @@ genre-card {
   padding: 0.2rem 0.4rem;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 0.4rem;
+  transition: font-size 0.3s ease-out;
 }
 
 .loading-spinner {
@@ -572,7 +630,8 @@ genre-card {
 }
 
 .side-bar {
-  position: absolute;
+  position: fixed;
+  top: 3rem;
   right: 0;
   display: flex;
   flex-direction: column;
@@ -585,7 +644,7 @@ genre-card {
   border: 0.1rem solid rgba(50, 55, 67, 1);
   border-right: 0;
   border-radius: 1rem 0 0 1rem;
-  z-index: 10;
+  z-index: 100;
   transform: translateX(100%);
   transition: transform 0.3s ease;
 }
@@ -610,18 +669,22 @@ genre-card {
   gap: 2rem;
 }
 
-.back-page-button, .next-page-button {
+.back-page-button,
+.next-page-button {
   border: 0.1rem solid rgba(66, 127, 250, 0.2);
   border-radius: 0.5rem;
   background: linear-gradient(45deg, #121418, #1e2127);
   padding: 0.2rem 0.5rem;
   font-size: 1rem;
   color: white;
+  transition: all 0.25s ease-out;
 }
 
-.back-page-button:hover, .next-page-button:hover {
+.back-page-button:hover,
+.next-page-button:hover {
+  transform: scale(1.05);
   cursor: pointer;
-  background: #4a505a;
+  background: #427ffaff;
 }
 
 @keyframes spin {
@@ -657,6 +720,10 @@ genre-card {
 }
 
 @media (min-width: 768px) {
+  body {
+    padding-top: 3rem;
+  }
+
   .header {
     height: 3rem;
   }
@@ -690,6 +757,7 @@ genre-card {
     position: relative;
     display: inline-block;
     border-radius: 0.6rem;
+    transition: width 0.3s ease-out;
   }
 
   .search {
@@ -713,6 +781,23 @@ genre-card {
 
   .search-button {
     display: none;
+  }
+
+  .header.search-active-mobile .title-container,
+  .header.search-active-mobile .menu-button {
+    display: flex; /* Garante que nunca se escondam no desktop */
+  }
+
+  .header.search-active-mobile .buttons-container {
+    width: auto; /* Reseta para o tamanho do conteúdo */
+    justify-content: center; /* Mantém o padrão do desktop */
+    margin-right: 0.5rem; /* Devolve a margem do desktop */
+    padding: 0; /* Remove o padding do mobile */
+    box-sizing: content-box; /* Reseta o box-sizing */
+  }
+
+  .header.search-active-mobile .search-wrapper {
+    width: auto; /* Garante que não expanda */
   }
 
   .popular-title {
@@ -743,7 +828,8 @@ genre-card {
     width: 9%;
   }
 
-  genre-card:hover, genre-card:hover .genre-name {
+  genre-card:hover,
+  genre-card:hover .genre-name {
     cursor: pointer;
     background-size: 115%;
     font-size: clamp(1rem, 5vw, 1.2rem);
@@ -899,7 +985,7 @@ genre-card {
   display: none;
   align-items: center;
   gap: 0.5rem;
-  margin: 1.5rem 2rem 0;  
+  margin: 1.5rem 2rem 0;
   background-color: #323743;
   color: #f0f0f0;
   border: 1px solid #4a505a;
@@ -920,5 +1006,5 @@ genre-card {
 }
 
 .btn-back-global svg {
-  margin-top: -1px; 
+  margin-top: -1px;
 }
