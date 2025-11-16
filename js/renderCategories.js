@@ -27,12 +27,16 @@ export function renderCategories() {
       const homePage = document.querySelector("home-page");
       const categoryPage = document.querySelector("movies-by-category-page");
 
+      const globalBackButton = document.getElementById("global-back-button");
+
       categoryPage.setAttribute("genre-name", genreFromAttr);
 
       LoadContent.loadMoviesByCategory(genreFromAttr, 1);
 
       homePage.style.display = "none";
       categoryPage.style.display = "flex";
+
+      globalBackButton.style.display = "inline-flex";
     });
 
     container.appendChild(item);
