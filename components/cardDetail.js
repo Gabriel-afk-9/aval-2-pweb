@@ -66,21 +66,24 @@ class CardDetails extends HTMLElement {
         const state = element.getAttribute('state')
         const dataIndex = element.getAttribute('data-index')
         if (state == '0') {
+          const episodesContainer = document.createElement("div");
+          episodesContainer.classList.add('episodes-list-expanded');
+
           for (let x = 0; x < parseInt(episodesArray[dataIndex], 10); x++) {
             console.log(parseInt(episodesArray[x], 10))
             const episodeName = document.createElement("p")
             episodeName.textContent = `episódio: ${x + 1}`
-            element.appendChild(episodeName)
+            episodesContainer.appendChild(episodeName)
           }
+
+          element.after(episodesContainer);
           element.setAttribute('state', '1');
         }
         else {
-          const children = Array.from(element.childNodes);
-          children.forEach(child => {
-            if (child.tagName !== 'H4') {
-              element.removeChild(child);
+          const nextElement = element.nextElementSibling;
+            if (nextElement && nextElement.classList.contains('episodes-list-expanded')) {
+                nextElement.remove();
             }
-          });
           element.setAttribute('state', '0');
         }
 
