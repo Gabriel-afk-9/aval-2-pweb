@@ -13,7 +13,8 @@ class HomePage extends HTMLElement {
         <h2 class="categories-title">Categorias</h2>
         <div class="categories-container"></div>
 
-        <div class="cards-container"></div>
+        <h2 class="extras-title">Extras</h2>
+        <div class="cards-container-home"></div>
       </div>
     `
   }

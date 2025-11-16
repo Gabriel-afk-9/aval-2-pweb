@@ -47,8 +47,10 @@ body {
 
 card-component {
   display: block;
-  width: 200px;
+  width: 10rem;
+  min-width: 10rem;
   height: auto;
+  flex-shrink: 0;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -386,6 +388,7 @@ card-component:hover {
 
 .popular-title,
 .more-title,
+.extras-title,
 .movies-title,
 .bests-title,
 .populars-title,
@@ -398,7 +401,7 @@ card-component:hover {
   font-size: 2rem;
   font-weight: bold;
   color: white;
-  margin: 0.5rem 0 1rem 2rem;
+  margin: 3rem 0 1rem 2rem;
 }
 
 .movies-title,
@@ -427,7 +430,8 @@ card-component:hover {
 }
 
 .popular-title::after,
-.categories-title::after {
+.categories-title::after,
+  .extras-title::after {
   content: "";
   position: absolute;
   left: 0;
@@ -451,6 +455,10 @@ card-component:hover {
 
 .categories-title::after {
   width: 35%;
+}
+
+.extras-title::after {
+  width: 17%;
 }
 
 .more-title::after {
@@ -537,18 +545,34 @@ card-component:hover {
   gap: 1rem;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 1rem;
+  padding: 2rem;
   height: calc(2 * 8rem + 1rem);
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   margin: 0 2rem;
 }
 
-.categories-container::-webkit-scrollbar {
+.cards-container-home {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1rem;
+  scroll-behavior: smooth;
+  margin: 0.5rem 2rem 3rem;
+  scroll-snap-type: x mandatory;
+}
+
+.cards-container-home > * {
+  scroll-snap-align: start;
+}
+
+.categories-container::-webkit-scrollbar, .cards-container-home::-webkit-scrollbar {
   height: 0.6rem;
 }
-.categories-container::-webkit-scrollbar-thumb {
-  background: #427ffa;
+.categories-container::-webkit-scrollbar-thumb, .cards-container-home::-webkit-scrollbar-thumb {
+  background: #8d8d8d;
   border-radius: 10rem;
 }
 
@@ -670,6 +694,15 @@ genre-card:hover {
   font-size: 1.2rem;
   text-align: left;
   white-space: nowrap;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.25s ease-out;
+}
+
+.side-bar button:hover {
+  cursor: pointer;
+  background-color: #427ffaff;
+  color: #fff;
 }
 
 .page-informations-container {
@@ -725,7 +758,12 @@ genre-card:hover {
 .footer-section a {
   width: min-content;
   white-space: nowrap;
-  border-bottom: 0.2rem solid rgba(50, 55, 67, 1);
+  color: white;
+  text-decoration: none;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.5rem;
+  border-bottom: 0;
+  transition: all 0.25s ease-out;
 }
 
 .footer-authors {
@@ -825,7 +863,7 @@ genre-card:hover {
 
   .search {
     display: block;
-    width: 14rem;
+    width: 19rem;
     height: 2rem;
     border-radius: 0.5rem;
     border: 0.1rem solid rgba(50, 55, 67, 1);
@@ -940,8 +978,9 @@ genre-card:hover {
   .side-bar button:hover,
   .footer-section a:hover {
     cursor: pointer;
-    border-bottom: 0.2rem solid rgba(50, 55, 67, 1);
-  }
+    background-color: #427ffaff;
+  border-radius: 0.5rem; 
+    }
 
   .footer-section a {
     border-bottom: 0;
@@ -1038,7 +1077,7 @@ genre-card:hover {
 
 .dropdown-item-meta {
   font-size: 0.8rem;
-  color: #b0b0b0;
+  color: #ffffff;
   display: flex;
   align-items: center;
   gap: 0.5rem;
