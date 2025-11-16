@@ -48,14 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const bestsPage = document.querySelector("bests-page");
 
   searchButton.addEventListener("click", () => {
-  // Adiciona/remove a classe no header inteiro
   header.classList.toggle("search-active-mobile");
 
   if (header.classList.contains("search-active-mobile")) {
-    // Foca no input QUANDO ele aparecer
     searchInput.focus();
   } else {
-    // Opcional: limpa o input ao fechar
     searchInput.value = "";
   }
 });
@@ -194,6 +191,8 @@ document.addEventListener("DOMContentLoaded", () => {
         searchDropdown.innerHTML = "";
         searchDropdown.style.display = "none";
         search.value = "";
+
+        header.classList.remove("search-active-mobile");
       });
 
       searchDropdown.appendChild(li);
@@ -205,23 +204,20 @@ document.addEventListener("DOMContentLoaded", () => {
   search.addEventListener("input", debounce(handleSearchInput, 300));
 
   document.addEventListener("click", (e) => {
-  // Lógica 1: Fechar o DROPDOWN de resultados (já existia)
   if (search && searchDropdown) {
     if (!search.contains(e.target) && !searchDropdown.contains(e.target)) {
       searchDropdown.style.display = "none";
     }
   }
 
-  // NOVO: Lógica 2: Fechar a BARRA de busca no mobile ao clicar fora
   const isSearchActive = header.classList.contains("search-active-mobile");
   
-  // Verifica se a busca está ativa e se o clique foi FORA da área de busca
   if (isSearchActive &&
       !e.target.closest(".search-button") && 
       !e.target.closest(".search-wrapper")
   ) {
     header.classList.remove("search-active-mobile");
-    if (searchInput) searchInput.value = ""; // Limpa o input ao fechar
+    if (searchInput) searchInput.value = "";
   }
 });
 

@@ -285,7 +285,7 @@ card-component:hover {
   margin-right: 1rem;
   display: flex;
   justify-content: flex-end;
-align-items: center;
+  align-items: center;
   gap: 0.5rem;
 }
 
@@ -293,14 +293,14 @@ align-items: center;
   position: relative;
   display: inline-block;
   border-radius: 0.6rem;
-  transition: width 0.3s ease-out; /* Anima a largura */
+  transition: width 0.3s ease-out;
 }
 
 .search {
   display: none;
-  box-sizing: border-box; /* Garante que padding não quebre o layout */
-  height: 2.5rem; /* Mesma altura do .search-button */
-  width: 100%; /* Vai preencher o wrapper */
+  box-sizing: border-box;
+  height: 2.5rem;
+  width: 100%;
   border-radius: 0.5rem;
   border: 0.1rem solid rgba(50, 55, 67, 1);
   background-color: rgba(23, 26, 31, 1);
@@ -351,28 +351,24 @@ align-items: center;
   opacity: 0.4;
 }
 
-/* 1. Esconde tudo, exceto o wrapper da busca */
 .header.search-active-mobile .title-container,
 .header.search-active-mobile .menu-button,
 .header.search-active-mobile .search-button {
   display: none;
 }
 
-/* 2. O container se expande e centraliza */
 .header.search-active-mobile .buttons-container {
   width: 100%;
-  justify-content: center; /* Centraliza o wrapper */
+  justify-content: center;
   margin-right: 0;
-  padding: 0 1rem; /* Adiciona respiro nas laterais */
-  box-sizing: border-box; /* Garante que o padding não quebre o layout */
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
-/* 3. O wrapper da busca ocupa o espaço disponível */
 .header.search-active-mobile .search-wrapper {
   width: 100%;
 }
 
-/* 4. O input de busca finalmente aparece */
 .header.search-active-mobile .search {
   display: block;
 }
@@ -394,8 +390,9 @@ align-items: center;
   margin: 0.5rem 0 1rem 2rem;
 }
 
-.movies-title, .tv-series-title {
-  margin: .2rem auto;
+.movies-title,
+.tv-series-title {
+  margin: 0.2rem auto;
   text-align: center;
 }
 
@@ -840,19 +837,19 @@ genre-card:hover {
 
   .header.search-active-mobile .title-container,
   .header.search-active-mobile .menu-button {
-    display: flex; /* Garante que nunca se escondam no desktop */
+    display: flex;
   }
 
   .header.search-active-mobile .buttons-container {
-    width: auto; /* Reseta para o tamanho do conteúdo */
-    justify-content: center; /* Mantém o padrão do desktop */
-    margin-right: 0.5rem; /* Devolve a margem do desktop */
-    padding: 0; /* Remove o padding do mobile */
-    box-sizing: content-box; /* Reseta o box-sizing */
+    width: auto;
+    justify-content: center;
+    margin-right: 0.5rem;
+    padding: 0;
+    box-sizing: content-box;
   }
 
   .header.search-active-mobile .search-wrapper {
-    width: auto; /* Garante que não expanda */
+    width: auto;
   }
 
   .popular-title {
@@ -899,7 +896,8 @@ genre-card:hover {
     width: max-content;
   }
 
-  .side-bar button:hover, .footer-section a:hover {
+  .side-bar button:hover,
+  .footer-section a:hover {
     cursor: pointer;
     border-bottom: 0.2rem solid rgba(50, 55, 67, 1);
   }
