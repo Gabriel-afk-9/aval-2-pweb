@@ -1,6 +1,6 @@
 import { LoadContent } from "../js/loadContent.js";
 
-class Movies extends HTMLElement {
+class TvSeries extends HTMLElement {
   actualPage = 1;
 
   connectedCallback() {
@@ -10,10 +10,10 @@ class Movies extends HTMLElement {
 
   render() {
     this.innerHTML = `
-      <div class="movies-page">
-        <h2 class="movies-title">Filmes disponíveis</h2>
+      <div class="tv-series-page">
+        <h2 class="tv-series-title">Séries disponíveis</h2>
 
-        <div class="movies-page-container"></div>
+        <div class="tv-series-page-container"></div>
 
         <div class="page-informations-container">
           <button class="back-page-button">Anterior</button>
@@ -29,7 +29,7 @@ class Movies extends HTMLElement {
 
     nextButton.addEventListener("click", () => {
       this.actualPage++;
-      LoadContent.loadMovies(this.actualPage);
+      LoadContent.loadTvSeries(this.actualPage);
       this.updatePageNumber();
     });
 
@@ -39,7 +39,7 @@ class Movies extends HTMLElement {
 
     backButton.addEventListener("click", () => {
       this.actualPage--;
-      LoadContent.loadMovies(this.actualPage);
+      LoadContent.loadTvSeries(this.actualPage);
       this.updatePageNumber();
     })
   }
@@ -52,4 +52,4 @@ class Movies extends HTMLElement {
   }
 }
 
-customElements.define("movies-page", Movies);
+customElements.define("tv-series-page", TvSeries);

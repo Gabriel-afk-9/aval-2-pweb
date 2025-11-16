@@ -9,9 +9,10 @@ import "../components/card.js";
 import "../components/loadingSpinner.js";
 import "../components/sideBar.js";
 import "../pages/movies.js";
+import "../pages/series.js";
 import { LoadPopular } from "./loadPopular.js";
 import { renderCategories } from "./renderCategories.js";
-import { loadMovies } from "./loadMovies.js";
+import { LoadContent } from "./loadContent.js";
 
 let local = "home";
 
@@ -35,8 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const homeButton = document.getElementById("home-button");
   const globalBackButton = document.getElementById("global-back-button");
   const moviesPage = document.querySelector("movies-page");
+  const tvSeriesPage = document.querySelector("tv-series-page");
 
   moviesPage.style.display = "none";
+  tvSeriesPage.style.display = "none";
 
   searchPage.style.display = "none";
   moviesByCategory.style.display = "none";
@@ -205,8 +208,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const moviesButton = document.querySelector("#go-to-movies");
   moviesButton.addEventListener("click", () => {
     homePage.style.display = "none";
+    tvSeriesPage.style.display = "none";
     moviesPage.style.display = "flex";
-    loadMovies(1);
+    LoadContent.loadMovies(1);
+    sideBar.toggle();
+  });
+
+  const tvSeriesButton = document.querySelector("#go-to-tv");
+  tvSeriesButton.addEventListener("click", () => {
+    homePage.style.display = "none";
+    moviesPage.style.display = "none";
+    tvSeriesPage.style.display = "flex";
+    LoadContent.loadTvSeries(1);
     sideBar.toggle();
   });
 });

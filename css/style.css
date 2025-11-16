@@ -30,6 +30,7 @@ body {
 .cards-container,
 .movies-container,
 .movies-page-container,
+.tv-series-page-container,
 .cards-details-container {
   display: flex;
   flex-wrap: wrap;
@@ -198,7 +199,7 @@ card-component:hover {
 
 .home-page,
 .movies-page,
-.tvSeries-page,
+.tv-series-page,
 .categories-page,
 .search-page {
   color: white;
@@ -300,6 +301,7 @@ card-component:hover {
 .popular-title,
 .more-title,
 .movies-title,
+.tv-series-title,
 .category-title,
 .categories-title {
   position: relative;
@@ -310,7 +312,7 @@ card-component:hover {
   margin: 0.5rem 0 1rem 2rem;
 }
 
-.movies-title {
+.movies-title, .tv-series-title {
   margin: .2rem auto;
   text-align: center;
 }
