@@ -7,6 +7,7 @@ import "../pages/search.js";
 import "../pages/moviesByCategory.js";
 import "../components/card.js";
 import "../components/loadingSpinner.js";
+import "../components/sideBar.js";
 import { LoadPopular } from "./loadPopular.js";
 import { renderCategories } from "./renderCategories.js";
 
@@ -23,7 +24,6 @@ function debounce(func, delay) {
 document.addEventListener("DOMContentLoaded", () => {
   const loadingSpinner = document.querySelector("loading-spinner");
   loadingSpinner.style.display = "none";
-
   const search = document.getElementById("search");
   const searchDropdown = document.getElementById("searchDropdown");
   const homePage = document.querySelector("home-page");
@@ -169,7 +169,18 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   LoadPopular.movies();
-});
+
+  const sideBar = document.querySelector("side-bar");
+  const menuButton = document.getElementById("menu-button");
+  let isOpen = false;
+
+  menuButton.addEventListener("click", () => {
+    isOpen = !isOpen;
+
+    isOpen ? menuButton.classList.add("toggled") : menuButton.classList.remove("toggled");
+    sideBar.toggle();
+  })
+})
 
 customElements.whenDefined("home-page").then(() => {
   renderCategories();
