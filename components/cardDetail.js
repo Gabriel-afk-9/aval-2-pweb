@@ -70,7 +70,6 @@ class CardDetails extends HTMLElement {
           episodesContainer.classList.add('episodes-list-expanded');
 
           for (let x = 0; x < parseInt(episodesArray[dataIndex], 10); x++) {
-            console.log(parseInt(episodesArray[x], 10))
             const episodeName = document.createElement("p")
             episodeName.textContent = `episódio: ${x + 1}`
             episodesContainer.appendChild(episodeName)
