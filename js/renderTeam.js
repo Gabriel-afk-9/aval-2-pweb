@@ -1,6 +1,5 @@
 export function renderTeam(team) {
-  const container1 = document.querySelector("#team-container-1");
-  const container2 = document.querySelector("#team-container-2");
+  const container = document.querySelector(".team-container");
   
   team.forEach(p => {
     const element = document.createElement("team-card");
@@ -10,6 +9,6 @@ export function renderTeam(team) {
     element.setAttribute("git-hub", p.gh);
     element.setAttribute("desc", p.desc);
 
-    container1.children.length >= 2 ? container2.appendChild(element) : container1.appendChild(element);
+    container.appendChild(element);
   });
 }
