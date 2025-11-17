@@ -347,7 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
       name: "Alan",
       img: "https://avatars.githubusercontent.com/u/181114504?v=4",
       gh: "https://github.com/alanrcastro100",
-      desc: "descrição não encontrada :C descrição não encontrada :C",
+      desc: "Designer e ilustrador. Focado em frontend mas sempre disposto a atualizar conhecimentos de backend.",
     }
   ]
 
