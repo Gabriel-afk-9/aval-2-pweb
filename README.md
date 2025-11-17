@@ -34,7 +34,7 @@ Para executar o projeto localmente, siga os passos abaixo:
     cd aval-2-pweb
     ```
 2.  **Abrir no Navegador:**
-    *   Como o projeto é puramente *frontend* (HTML, CSS, JS), basta abrir o arquivo `index.html` (ou o arquivo principal) diretamente no seu navegador.
+    * Como o projeto é puramente *frontend* (HTML, CSS, JS), basta abrir o arquivo `index.html` (ou o arquivo principal) diretamente no seu navegador.
 
 ---
 
