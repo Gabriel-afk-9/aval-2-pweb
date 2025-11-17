@@ -148,39 +148,80 @@ card-component:hover {
   display: grid;
   grid-template-columns: 1fr 1fr; 
   margin-top: 2rem;
-  gap: 10px; /* Diminui um pouco o gap para caber melhor no celular */
+  gap: 10px;
   font-weight: 900;
   text-shadow: 6px 6px 20px rgba(182, 203, 243, 0.8);
 }
 
-.class-detail-seasons div {
-  padding: 5px;
-  cursor: pointer;
-  text-align: center;
-  border-radius: 6px;
-  text-transform: uppercase;
+.class-detail-seasons {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  margin-top: 2rem;
+  gap: 10px;
+  width: 100%;
 }
-
 .episodes-list-expanded {
   grid-column: 1 / -1;
-  background-color: #1a1a1a;
-  padding: 20px;
+  background-color: #0e1014;
+  padding: 1rem;
   margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #323743;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  animation: fadeIn 0.3s ease;
+  align-items: center;
 }
 
-.class-detail-seasons > div {
+.episodes-list-expanded p {
+  margin: 0;
+  padding: 10px;
+  font-size: 0.9rem;
+  color: #b0b0b0;
+  border-bottom: 1px solid #1e2127;
+  text-align: left;
+}
+
+.episodes-list-expanded p:last-child {
+  border-bottom: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.class-detail-seasons > div:not(.episodes-list-expanded) {
   background-color: #007bff;
   padding: 10px;
   width: auto;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;     /* Centraliza verticalmente */
+  text-align: center;
+}
+
+.class-detail-seasons > div:not(.episodes-list-expanded):hover {
+  background-color: #438cf1;
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.class-detail-seasons h4 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .class-detail-seasons > p {
   display: block;
   margin-top: 4px;
-}
-
-.class-detail-seasons div:hover {
-  background-color: #438cf1;
 }
 
 .card {
@@ -424,7 +465,7 @@ card-component:hover {
 .releases-title,
 .populars-title,
 .bests-title {
-  margin: 0.2rem auto;
+  margin: 1.5rem auto;
   text-align: center;
 }
 
@@ -977,6 +1018,20 @@ genre-card:hover {
   text-align: center;
 }
 
+.episodes-list-expanded {
+  align-items: start;
+}
+
+.class-detail-seasons {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+
+  .class-detail-seasons > div:not(.episodes-list-expanded) {
+    align-items: flex-start;
+    padding: 20px 10px;
+  }
+
   .search-wrapper {
     position: relative;
     display: inline-block;
@@ -1088,7 +1143,6 @@ genre-card:hover {
 
   .side-bar button {
     font-size: 1.5rem;
-    width: max-content;
   }
 
   .side-bar button:hover,

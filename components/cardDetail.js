@@ -10,7 +10,6 @@ class CardDetails extends HTMLElement {
     const overview = this.getAttribute('overview');
 
     this.innerHTML = `
-      
       <div class="card-detail">
         <h3 class="card-detail-title">${title}</h3>
         
@@ -22,75 +21,69 @@ class CardDetails extends HTMLElement {
               <div id="genrers" class="card-details-genres"></div>          
               <p class="card-detail-rate" class="class-detail-avaliation"><strong>Avaliação⭐: </strong>${rate}</p>
             </div>
-
         </div>
-        <div id="seasons" class="class-detail-seasons"><div>
+        <div id="seasons" class="class-detail-seasons"></div>
       </div>
     `;
-    const genresParagra = document.getElementById('genrers')
-    const seasonsParagra = document.getElementById('seasons')
+
+    const genresParagra = document.getElementById('genrers');
+    const seasonsParagra = document.getElementById('seasons');
     const genresArray = genres ? genres.split(',') : [];
     const seasonsArray = seasons ? seasons.split(',') : [];
     const episodesArray = episodes ? episodes.split(',') : [];
 
-    genresArray.forEach(element => {
-      if (genresArray.length > 0) {
+    if (genresArray.length > 0) {
+      genresArray.forEach(element => {
         const genre = document.createElement("div");
-        const genreName = document.createElement("p")
-        genreName.textContent = element
-        genre.appendChild(genreName)
-        genresParagra.appendChild(genre)
-      }
-    })
-
-    let add = 0;
+        const genreName = document.createElement("p");
+        genreName.textContent = element;
+        genre.appendChild(genreName);
+        genresParagra.appendChild(genre);
+      });
+    }
 
     if (seasonsArray.length > 0) {
-      seasonsArray.forEach(element => {
+      seasonsArray.forEach((element, index) => {
         const season = document.createElement("div");
-        const seasonsName = document.createElement("h4")
-        season.setAttribute('state', '0')
-        season.setAttribute('data-index', add);
+        const seasonsName = document.createElement("h4");
+        
+        seasonsName.textContent = `Temporada ${index + 1}`;
+        season.appendChild(seasonsName);
 
-        seasonsName.textContent = `Temporada ${add + 1}  ⇨`
-        season.appendChild(seasonsName)
-        seasonsParagra.appendChild(season)
+        season.addEventListener('click', () => {
+          const nextElement = season.nextElementSibling;
+          const isAlreadyOpen = nextElement && nextElement.classList.contains('episodes-list-expanded');
 
-        add++;
-      }
+          const allOpenEpisodes = seasonsParagra.querySelectorAll('.episodes-list-expanded');
+          allOpenEpisodes.forEach(el => el.remove());
 
-      )
-    }
-    seasonsParagra.childNodes.forEach(element => {
-      element.addEventListener('click', () => {
-        const state = element.getAttribute('state')
-        const dataIndex = element.getAttribute('data-index')
-        if (state == '0') {
+          if (isAlreadyOpen) {
+            return; 
+          }
+
           const episodesContainer = document.createElement("div");
           episodesContainer.classList.add('episodes-list-expanded');
 
-          for (let x = 0; x < parseInt(episodesArray[dataIndex], 10); x++) {
-            const episodeName = document.createElement("p")
-            episodeName.textContent = `episódio: ${x + 1}`
-            episodesContainer.appendChild(episodeName)
+          const episodeCount = parseInt(episodesArray[index], 10) || 0;
+
+          if (episodeCount > 0) {
+            for (let x = 0; x < episodeCount; x++) {
+              const episodeName = document.createElement("p");
+              episodeName.textContent = `Episódio ${x + 1}`;
+              episodesContainer.appendChild(episodeName);
+            }
+          } else {
+            const noEps = document.createElement("p");
+            noEps.textContent = "Nenhum episódio disponível.";
+            episodesContainer.appendChild(noEps);
           }
 
-          element.after(episodesContainer);
-          element.setAttribute('state', '1');
-        }
-        else {
-          const nextElement = element.nextElementSibling;
-            if (nextElement && nextElement.classList.contains('episodes-list-expanded')) {
-                nextElement.remove();
-            }
-          element.setAttribute('state', '0');
-        }
-
-      })
-    })
-
-    seasonsParagra.firstChild.hidden = true;
-
+          season.after(episodesContainer);
+        });
+        seasonsParagra.appendChild(season);
+      });
+    }
   }
 }
+
 customElements.define("card-details-component", CardDetails);
