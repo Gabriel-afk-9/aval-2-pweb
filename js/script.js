@@ -15,6 +15,7 @@ import "../pages/bests.js";
 import "../components/footer.js";
 import "../pages/team.js";
 import "../components/teamCard.js";
+import "../components/errorAlert.js";
 import { LoadPopular } from "./loadPopular.js";
 import { renderCategories } from "./renderCategories.js";
 import { LoadContent } from "./loadContent.js";
@@ -52,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const bestsPage = document.querySelector("bests-page");
   const cardsContainerHome = document.querySelector(".cards-container-home");
   const teamPage = document.querySelector("team-page");
+  const errorAlert = document.querySelector("error-alert");
 
   getContent(cardsContainerHome);
 
@@ -76,6 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   teamPage.style.display = "none";
 
+  errorAlert.style.display = "none";
+
   function goToHome() {
     homePage.style.display = "flex";
     searchPage.style.display = "none";
@@ -87,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     bestsPage.style.display = "none";
     tvSeriesPage.style.display = "none";
     teamPage.style.display = "none";
+    errorAlert.style.display = "none";
 
     if (search) search.value = "";
     if (searchDropdown) {
@@ -215,6 +220,8 @@ document.addEventListener("DOMContentLoaded", () => {
   search.addEventListener("input", debounce(handleSearchInput, 300));
 
   document.addEventListener("click", (e) => {
+    errorAlert.style.display = "none";
+    
     if (search && searchDropdown) {
       if (!search.contains(e.target) && !searchDropdown.contains(e.target)) {
         searchDropdown.style.display = "none";

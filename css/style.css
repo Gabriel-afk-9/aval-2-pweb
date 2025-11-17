@@ -303,6 +303,11 @@ card-component:hover {
   width: 100%;
 }
 
+.team-page {
+  justify-content: center;
+  align-items: center;
+}
+
 .header {
   width: 100%;
   height: 5rem;
@@ -478,10 +483,12 @@ card-component:hover {
 }
 
 .team-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 90%;
+  justify-items: center;
+  align-items: center
 }
 
 .team-container-intern {
@@ -505,8 +512,8 @@ card-component:hover {
 .team-card {
   background: linear-gradient(45deg, #0000cd, #007bff);
   overflow: hidden;
-  width: 100%;
-  height: min-content;
+  max-width: 40rem;
+  height: 8.5rem;
   display: flex;
   box-sizing: border-box;
   padding: 0.5rem;
@@ -537,12 +544,18 @@ card-component:hover {
 }
 
 .team-desc {
-  line-clamp: 2;
   font-size: 1rem;
   margin: 0;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
   width: 100%;
   min-width: 0;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
 }
 
 .team-link {
@@ -564,7 +577,7 @@ card-component:hover {
 
 .popular-title::after,
 .categories-title::after,
-  .extras-title::after {
+.extras-title::after {
   content: "";
   position: absolute;
   left: 0;
@@ -701,10 +714,12 @@ card-component:hover {
   scroll-snap-align: start;
 }
 
-.categories-container::-webkit-scrollbar, .cards-container-home::-webkit-scrollbar {
+.categories-container::-webkit-scrollbar,
+.cards-container-home::-webkit-scrollbar {
   height: 0.6rem;
 }
-.categories-container::-webkit-scrollbar-thumb, .cards-container-home::-webkit-scrollbar-thumb {
+.categories-container::-webkit-scrollbar-thumb,
+.cards-container-home::-webkit-scrollbar-thumb {
   background: #8d8d8d;
   border-radius: 10rem;
 }
@@ -872,6 +887,7 @@ genre-card:hover {
   box-sizing: border-box;
   padding: 1rem;
   gap: 1rem;
+  width: 100%;
 }
 
 .footer-body {
@@ -919,6 +935,24 @@ genre-card:hover {
   background-color: white;
   height: 1rem;
   margin: 0.4rem;
+}
+
+.error-container {
+  background-color: #1a1a1a;
+  color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  border: 0.2rem solid white;
+  border-radius: 1rem;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.error-mensage {
+  font-size: 1rem;
+  margin: 0;
 }
 
 @keyframes spin {
@@ -1068,17 +1102,17 @@ genre-card:hover {
   }
 
   .header.search-active-mobile .buttons-container {
-    width: auto; 
-    justify-content: center; 
-    margin-right: 0.5rem; 
-    padding: 0; 
+    width: auto;
+    justify-content: center;
+    margin-right: 0.5rem;
+    padding: 0;
     box-sizing: content-box;
     flex-grow: 0;
     margin-left: 0;
   }
 
-.header.search-active-mobile .search-wrapper {
-    width: auto; 
+  .header.search-active-mobile .search-wrapper {
+    width: auto;
     flex-grow: 0;
     display: inline-block;
   }
@@ -1149,8 +1183,8 @@ genre-card:hover {
   .footer-section a:hover {
     cursor: pointer;
     background-color: #427ffaff;
-  border-radius: 0.5rem; 
-    }
+    border-radius: 0.5rem;
+  }
 
   .footer-section a {
     border-bottom: 0;
@@ -1162,6 +1196,26 @@ genre-card:hover {
 
   .footer-divisor {
     margin: 1rem;
+  }
+
+  .team-page {
+    margin-bottom: 2rem;
+  }
+
+  .team-title {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+
+  .team-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+  }
+
+  .team-container-intern {
+    width: 80%;
   }
 }
 
