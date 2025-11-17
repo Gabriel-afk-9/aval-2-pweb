@@ -1,5 +1,7 @@
 import { Config } from "./config.js";
 import { renderCards } from "./renderCards.js";
+import { getSearchId } from "./searchById.js";
+import { renderICardsDetails } from "./renderICardsDetails.js";
 
 function getRandomPage(max = 500) {
   return Math.floor(Math.random() * max) + 1;
@@ -15,7 +17,8 @@ async function getRandomMovies() {
     }
   });
   const data = await res.json();
-  return data.results;
+  
+  return data.results.map(item => ({ ...item, media_type: 'movie' }));
 }
 
 async function getRandomTvShows() {
@@ -28,7 +31,8 @@ async function getRandomTvShows() {
     }
   });
   const data = await res.json();
-  return data.results;
+  
+  return data.results.map(item => ({ ...item, media_type: 'tv' }));
 }
 
 function shuffleArray(arr) {
@@ -48,4 +52,34 @@ export async function getContent(container) {
   const content = await loadExtras();
 
   renderCards(container, content);
+
+  const cards = container.querySelectorAll("card-component");
+
+  cards.forEach(card => {
+    card.addEventListener("click", async () => {
+      const id = card.getAttribute("id");
+      const type = card.getAttribute("media_type");
+      const searchPage = document.querySelector("search-page");
+      const globalBackButton = document.getElementById("global-back-button");
+      const mainPages = document.querySelectorAll("main > *:not(loading-spinner):not(side-bar)");
+
+      mainPages.forEach(page => page.style.display = "none");
+
+      searchPage.style.display = "flex";
+      
+      if (globalBackButton) {
+        globalBackButton.style.display = "inline-flex";
+      }
+
+      const detailsContainer = searchPage.querySelector(".cards-details-container");
+      
+      if (detailsContainer) {
+          detailsContainer.innerHTML = '<loading-spinner style="display: block; margin: 40px auto;"></loading-spinner>';
+          const data = await getSearchId(id, type);
+          renderICardsDetails(detailsContainer, data);
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
 }

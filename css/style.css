@@ -392,7 +392,10 @@ card-component:hover {
 }
 
 .movies-title,
-.tv-series-title {
+.tv-series-title,
+.releases-title,
+.populars-title,
+.bests-title {
   margin: 0.2rem auto;
   text-align: center;
 }
