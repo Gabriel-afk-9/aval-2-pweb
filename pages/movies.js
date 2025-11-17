@@ -1,6 +1,6 @@
 import { LoadContent } from "../js/loadContent.js";
 
-class Movies extends HTMLElement {
+class MoviesPage extends HTMLElement {
   _actualPage = 1;
 
   set actualPage(value) {
@@ -67,4 +67,4 @@ class Movies extends HTMLElement {
   }
 }
 
-customElements.define("movies-page", Movies);
+customElements.define("movies-page", MoviesPage);

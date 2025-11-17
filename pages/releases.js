@@ -1,6 +1,6 @@
 import { LoadContent } from "../js/loadContent.js";
 
-class Releases extends HTMLElement {
+class ReleasesPage extends HTMLElement {
   _actualPage = 1;
 
   set actualPage(value) {
@@ -67,4 +67,4 @@ class Releases extends HTMLElement {
   }
 }
 
-customElements.define("releases-page", Releases);
+customElements.define("releases-page", ReleasesPage);
