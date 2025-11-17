@@ -199,8 +199,8 @@ card-component:hover {
   border-radius: 6px;
   transition: all 0.2s ease;
   display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: center;     /* Centraliza verticalmente */
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
