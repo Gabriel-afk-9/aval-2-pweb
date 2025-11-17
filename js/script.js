@@ -13,10 +13,13 @@ import "../pages/releases.js";
 import "../pages/populars.js";
 import "../pages/bests.js";
 import "../components/footer.js";
+import "../pages/team.js";
+import "../components/teamCard.js";
 import { LoadPopular } from "./loadPopular.js";
 import { renderCategories } from "./renderCategories.js";
 import { LoadContent } from "./loadContent.js";
 import { getContent } from "./getContent.js";
+import { renderTeam } from "./renderTeam.js";
 
 let local = "home";
 
@@ -48,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const popularsPage = document.querySelector("populars-page");
   const bestsPage = document.querySelector("bests-page");
   const cardsContainerHome = document.querySelector(".cards-container-home");
+  const teamPage = document.querySelector("team-page");
 
   getContent(cardsContainerHome);
 
@@ -70,6 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
   searchPage.style.display = "none";
   moviesByCategory.style.display = "none";
 
+  teamPage.style.display = "none";
+
   function goToHome() {
     homePage.style.display = "flex";
     searchPage.style.display = "none";
@@ -80,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     popularsPage.style.display = "none";
     bestsPage.style.display = "none";
     tvSeriesPage.style.display = "none";
+    teamPage.style.display = "none";
 
     if (search) search.value = "";
     if (searchDropdown) {
@@ -316,6 +323,43 @@ document.addEventListener("DOMContentLoaded", () => {
     LoadContent.loadBestRating,
     false
   );
+
+  const informations = [
+    {
+      name: "Samuel Nascimento",
+      img: "https://avatars.githubusercontent.com/u/199638000?v=4",
+      gh: "https://github.com/Zidan-09",
+      desc: "Sou programador Fullstack, apaixonado por criar aplicativos, jogos e experiências interativas.",
+    },
+    {
+      name: "Gabriel Lima",
+      img: "https://avatars.githubusercontent.com/u/180032627?v=4",
+      gh: "https://github.com/Gabriel-afk-9",
+      desc: "Frontend Developer | Backend Enthusiast | Sistemas de Computação - UESPI",
+    },
+    {
+      name: "Paulo Alves",
+      img: "https://avatars.githubusercontent.com/u/160227231?v=4",
+      gh: "https://github.com/PaulEvezely",
+      desc: "Studying programming in Technology in Computer Systems at UESPI College.",
+    },
+    {
+      name: "Alan",
+      img: "https://avatars.githubusercontent.com/u/181114504?v=4",
+      gh: "https://github.com/alanrcastro100",
+      desc: "descrição não encontrada :C descrição não encontrada :C",
+    }
+  ]
+
+  renderTeam(informations);
+
+  const teamButton = document.querySelector("#go-team");
+
+  teamButton.addEventListener("click", () => {
+    goToHome();
+    homePage.style.display = "none";
+    teamPage.style.display = "flex";
+  })
 });
 
 customElements.whenDefined("home-page").then(() => {

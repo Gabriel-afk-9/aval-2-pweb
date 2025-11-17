@@ -14,11 +14,11 @@ class Footer extends HTMLElement {
           </div>
 
           <div class="footer-section">
-            <a>Configurações</a>
+            <a>Em dev</a>
           </div>
             
           <div class="footer-section">
-            <a>Equipe</a>
+            <a id="go-team">Equipe</a>
           </div>
         </div>
 

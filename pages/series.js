@@ -1,6 +1,6 @@
 import { LoadContent } from "../js/loadContent.js";
 
-class TvSeries extends HTMLElement {
+class TvSeriesPage extends HTMLElement {
   _actualPage = 1;
 
   set actualPage(value) {
@@ -67,4 +67,4 @@ class TvSeries extends HTMLElement {
   }
 }
 
-customElements.define("tv-series-page", TvSeries);
+customElements.define("tv-series-page", TvSeriesPage);
