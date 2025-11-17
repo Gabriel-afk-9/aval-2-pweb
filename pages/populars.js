@@ -1,6 +1,6 @@
 import { LoadContent } from "../js/loadContent.js";
 
-class Populars extends HTMLElement {
+class PopularsPage extends HTMLElement {
   _actualPage = 1;
 
   set actualPage(value) {
@@ -67,4 +67,4 @@ class Populars extends HTMLElement {
   }
 }
 
-customElements.define("populars-page", Populars);
+customElements.define("populars-page", PopularsPage);

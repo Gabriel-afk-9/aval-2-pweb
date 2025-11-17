@@ -1,6 +1,6 @@
 import { LoadContent } from "../js/loadContent.js";
 
-class MoviesByCategory extends HTMLElement {
+class MoviesByCategoryPage extends HTMLElement {
   _actualPage = 1;
   genreName = null;
 
@@ -81,4 +81,4 @@ class MoviesByCategory extends HTMLElement {
   }
 }
 
-customElements.define("movies-by-category-page", MoviesByCategory);
+customElements.define("movies-by-category-page", MoviesByCategoryPage);
