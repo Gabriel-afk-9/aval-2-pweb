@@ -896,6 +896,24 @@ genre-card:hover {
   margin: 0.4rem;
 }
 
+.error-container {
+  background-color: #1a1a1a;
+  color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  border: 0.2rem solid white;
+  border-radius: 1rem;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.error-mensage {
+  font-size: 1rem;
+  margin: 0;
+}
+
 @keyframes spin {
   from {
     --angle: 0deg;
